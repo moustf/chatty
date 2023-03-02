@@ -9,11 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chatty/types": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@chatty/types": "*",
     "@chatty/eslint-config": "*",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
