@@ -1,0 +1,34 @@
+{
+  "name": "chatty",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "test": "turbo run test --concurrency=1",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@chatty/eslint-config": "*",
+    "@commitlint/cli": "^17.4.0",
+    "@commitlint/config-conventional": "^17.4.0",
+    "@types/node": "^18.11.18",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.16.16",
+    "husky": "^8.0.0",
+    "turbo": "latest",
+    "typescript": "^4.9.4",
+    "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "yarn@1.22.19"
+}

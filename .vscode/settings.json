@@ -1,0 +1,18 @@
+{
+  "eslint.workingDirectories": [
+    "packages/*",
+    "apps/*"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.formatOnSave": false,
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false,
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true
+}

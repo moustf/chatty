@@ -1,0 +1,19 @@
+{
+  "version": "0.0.0",
+  "name": "@chatty/types",
+  "license": "UNLICENSED",
+  "scripts": {
+    "writeIndexes": "node ../../scripts/writeIndexes.js --dir=enums,interfaces",
+    "build": "yarn writeIndexes",
+    "dev": "nodemon -e ts --quiet --watch interfaces --watch enums --ignore index.ts --exec \"yarn writeIndexes\"",
+    "lint": "cross-env TIMING=1 eslint . --ext js,ts",
+    "lint:fix": "yarn lint --fix"
+  },
+  "devDependencies": {
+    "@chatty/eslint-config": "*",
+    "mongoose": "^6.8.3",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.4"
+  },
+  "exports": "./index.ts"
+}

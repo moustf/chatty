@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "folke.vscode-monorepo-workspace",
+    "dbaeumer.vscode-eslint",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "visualstudioexptteam.vscodeintellicode",
+    "mongodb.mongodb-vscode",
+    "vscode-icons-team.vscode-icons",
+    "gruntfuggly.todo-tree",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense"
+  ]
+}
