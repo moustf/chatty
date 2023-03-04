@@ -1,6 +1,9 @@
-import { app } from './server';
+import { config } from './config/environments';
+import { httpServer as server } from './server';
 
-const port = app.get('port');
+const { port } = config;
 
-// eslint-disable-next-line no-console
-app.listen(port, () => console.log(`Server started http://localhost:${port}`));
+server.listen(port, () =>
+  // eslint-disable-next-line no-console
+  console.log(`Server started http://localhost:${port}`)
+);
