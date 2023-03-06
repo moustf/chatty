@@ -13,6 +13,7 @@
     "test": "turbo run test --concurrency=1",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
+    "start": "turbo run start",
     "prepare": "husky install"
   },
   "devDependencies": {
