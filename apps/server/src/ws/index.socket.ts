@@ -4,14 +4,13 @@ import { Server as SocketServer } from 'socket.io';
 
 import { SocketEventsMap } from '@chatty/types';
 
+import { SOCKET_CORS_OPTIONS } from '../config/cors';
+
 import { plugChatEvents } from './chat.socket';
 
 export const initializeSocketIOServer = (httpServer: Server) => {
   const io: SocketServer<SocketEventsMap> = new SocketServer(httpServer, {
-    cors: {
-      origin: '*',
-      methods: ['POST', 'GET'],
-    },
+    cors: SOCKET_CORS_OPTIONS,
   });
 
   plugChatEvents(io);

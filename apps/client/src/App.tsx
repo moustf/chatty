@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { io } from "socket.io-client";
+import { useConnect } from "./hooks/useConnect";
 import "./App.css";
-import { useConnect } from "./useConnect";
 
 function App() {
   const { socket } = useConnect();

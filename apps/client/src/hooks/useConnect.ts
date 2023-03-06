@@ -1,12 +1,12 @@
-/* eslint-disable no-console */
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { SocketEventsMap } from '@chatty/types';
 
 const url = import.meta.env.VITE_APP_BASE_URL;
+
 const socket: Socket<SocketEventsMap> = io(`${url}/chat`, {
   transports: ['websocket'],
-});
+}); // ? Keep it here to create only one socket instance.
 
 export const useConnect = () => {
   const [isConnected, setIsConnected] = useState(false);
