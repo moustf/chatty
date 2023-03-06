@@ -13,12 +13,30 @@
   },
   "dependencies": {
     "@chatty/types": "*",
-    "express": "^4.18.2"
+    "bcrypt": "^5.1.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongo-seeding": "^3.7.2",
+    "mongoose": "^7.0.0",
+    "socket.io": "^4.6.1"
   },
   "devDependencies": {
     "@chatty/eslint-config": "*",
+    "@types/axios": "^0.14.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/compression": "^1.7.2",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "nodemon": "^2.0.21",
+    "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.5"
   }
 }
