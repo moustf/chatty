@@ -7,8 +7,7 @@ import express, { Application, Request, Response } from 'express';
 
 import { serverCorsOptions } from './config/cors';
 import { config } from './config/environments';
-import { WebSocket } from './ws/server.socket';
-import { TestSocket } from './ws/test.socket';
+import { initializeSocketIOServer } from './ws/server.socket';
 
 export class App {
   public app: Application;
@@ -40,6 +39,4 @@ const { app } = new App();
 
 export const httpServer = createServer(app);
 
-const ws = WebSocket.getInstance(httpServer);
-
-ws.initializeHandlers([{ path: '/test', handler: new TestSocket() }]);
+initializeSocketIOServer(httpServer);

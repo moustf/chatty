@@ -1,17 +1,12 @@
-import { useState } from 'react'
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import './App.css';
 
-const socket = io('http://localhost:3000/test');
+const socket = io();
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  socket.emit('connection', 'hello');
-
-  socket.on('echo', (data) => {
-    console.log(data);
-  })
+  socket.on('connection', () => {
+    console.log('The client connected successfully!');
+  });
 
   return (
     <div className="App">

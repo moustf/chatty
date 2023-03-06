@@ -1,36 +1,26 @@
-import { Server, Socket } from 'socket.io';
+import { Server } from 'http';
 
-import { socketCorsOptions } from '../config/cors';
+import { Server as SocketServer } from 'socket.io';
 
-export class WebSocket extends Server {
-  private static io: WebSocket;
+// import { socketCorsOptions } from '../config/cors';
 
-  constructor(httpServer: any) {
-    super(httpServer, {
-      cors: socketCorsOptions,
+export let io: SocketServer | null = null;
+
+export const initializeSocketIOServer = (httpServer: Server) => {
+  io = new SocketServer(httpServer, {
+    cors: {
+      origin: '*',
+      methods: ['POST', 'GET'],
+    },
+  });
+
+  // const chatTopic = io.of('/chat');
+
+  io.on('connection', (socket) => {
+    console.log('Socket Connected!');
+
+    socket.on('echo', async (data: string) => {
+      console.log(data);
     });
-  }
-
-  public initializeHandlers(socketHandlers: Array<any>) {
-    socketHandlers.forEach((socketHandler: any) => {
-      const namespace = WebSocket.io.of(
-        socketHandler.path,
-        (socket: Socket) => {
-          socketHandler.handler.handleConnection(socket);
-        }
-      );
-
-      if (socketHandler.handler.middlewareImplementation) {
-        namespace.use(socketHandler.handler.middlewareImplementation);
-      }
-    });
-  }
-
-  public static getInstance(httpServer: any) {
-    if (!WebSocket.io) {
-      WebSocket.io = new WebSocket(httpServer);
-    }
-
-    return WebSocket.io;
-  }
-}
+  });
+};
