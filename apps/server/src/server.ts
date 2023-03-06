@@ -7,8 +7,8 @@ import express, { Application, Request, Response } from 'express';
 
 import { serverCorsOptions } from './config/cors';
 import { config } from './config/environments';
-import { initializeSocketIOServer } from './ws/server.socket';
 
+// TODO: REMOVE CLASS BS
 export class App {
   public app: Application;
   public nodeEnv: string;
@@ -38,5 +38,3 @@ export class App {
 const { app } = new App();
 
 export const httpServer = createServer(app);
-
-initializeSocketIOServer(httpServer);
