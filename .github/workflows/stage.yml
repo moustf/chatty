@@ -48,13 +48,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: Get tag name
-        uses: olegtarasov/get-tag@v2
-
       - name: GitHub Action for DigitalOcean - doctl
         uses: digitalocean/action-doctl@v2.3.0
         with:
           token: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
 
       - name: Provision Droplet and deploy container
-        uses: doctl compute droplet create "$GET_TAG_NAME" --image docker-18-04 --region fra1 --size s-1vcpu-1gb --user-data-file deploy.sh --wait
+        uses: doctl compute droplet create chatty --image docker-18-04 --region fra1 --size s-1vcpu-1gb --user-data-file deploy.sh --wait
