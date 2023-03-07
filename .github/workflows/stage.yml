@@ -1,0 +1,57 @@
+name: deployment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Label of the container job
+  container-job:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    # Docker Hub image that `container-job` executes in
+    strategy:
+      matrix:
+        node: [16]
+
+    name: Node ${{ matrix.node }} sample
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Build and bush Docker images.
+        uses: docker/build-push-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: moustf/chatty
+          tag_with_ref: true
+          tag_with_sha: true
+
+      - name: Build files
+        run: npm build
+
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: GitHub Action for DigitalOcean - doctl
+        uses: digitalocean/action-doctl@v2.3.0
+        with:
+          token: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
+
+      - name: Provision Droplet and deploy container
+        uses: doctl compute droplet create chatty --image docker-18-04 --region fra1 --size s-1vcpu-1gb --user-data-file deploy.sh --wait
