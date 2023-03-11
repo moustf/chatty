@@ -21,15 +21,15 @@ app.use([
 
 app.set('port', process.env.port || config.port);
 
+app.get('/echo', (_req: Request, res: Response) =>
+  res.json({ text: "I'm Alive" })
+);
+
 if (config.nodeEnv === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'dist')));
   app.use('*', (_req: Request, res: Response) => {
     res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
   });
 }
-
-app.get('/echo', (_req: Request, res: Response) =>
-  res.json({ text: "I'm Alive" })
-);
 
 export const httpServer = createServer(app);
