@@ -14,7 +14,7 @@ Chatty is a web based chat application that allow people to talk with others and
 
 - When the user first opens the website, he will be asked to signup.
 - If the user has an account, he can login to his profile by hitting `Login` button and use the application normally.
-- Once the user logged in or signed up, he can will be directed to the home page.
+- Once the user logged in or signed up, he will be directed to the home page.
 - In the home page, the user can find a list of the user he added on the left side, and a chat tap for each on of them on the right side.
 - The user can find an `Add New Contacts` icon button, when he hits that icon, a pop-up will appear. The user can search for contacts by username and send `Add` request to them. After the other user approve the request, the two users can start a conversation using the app.
 - In the chat part of the screen, the user can share images, files, and other stuff from the upload buttons.
