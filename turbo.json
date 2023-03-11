@@ -6,7 +6,8 @@
         "^build"
       ],
       "outputs": [
-        "**/server.js"
+        "**/server.js",
+        "**/dist/**"
       ]
     },
     "start": {
