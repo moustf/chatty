@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const usersSchema = new mongoose.Schema(
+import { User as UserInterface } from '@chatty/types';
+
+const usersSchema = new mongoose.Schema<UserInterface>(
   {
     firstName: {
       type: String,

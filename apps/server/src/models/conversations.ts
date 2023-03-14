@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-const conversationsSchema = new mongoose.Schema(
+import { Conversation as ConversationInterface } from '@chatty/types';
+
+const conversationsSchema = new mongoose.Schema<ConversationInterface>(
   {
     users: [
       {
