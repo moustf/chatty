@@ -8,6 +8,8 @@ import express, { Request, Response } from 'express';
 
 import { SERVER_CORS_OPTIONS } from './config/cors';
 import { config } from './config/environments';
+import { Conversation } from './models/conversations';
+import { User } from './models/users';
 
 const app = express();
 
@@ -21,9 +23,12 @@ app.use([
 
 app.set('port', process.env.port || config.port);
 
-app.get('/echo', (_req: Request, res: Response) =>
-  res.json({ text: "I'm Alive" })
-);
+app.get('/echo', async (_req: Request, res: Response) => {
+  const users = await User.find({}).exec();
+  const conversations = await Conversation.find({}).exec();
+
+  return res.json({ text: "I'm Alive", users, conversations });
+});
 
 if (config.nodeEnv === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'dist')));
