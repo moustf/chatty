@@ -11,14 +11,24 @@ const conversationsSchema = new mongoose.Schema<ConversationInterface>(
         required: [true, "Conversation can't be established without users!"],
       },
     ],
-    messages: {
-      type: String,
-      validate: {
-        validator: function (v: string) {
-          return /text|action|image/.test(v);
+    messages: [
+      {
+        type: {
+          type: String,
+          enum: ['text', 'action', 'image'],
+        },
+        text: {
+          type: String,
+        },
+        image: {
+          type: String,
+        },
+        sender: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
         },
       },
-    },
+    ],
     name: {
       type: String,
     },
