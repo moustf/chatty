@@ -37,4 +37,5 @@ jobs:
         env:
           CI: true
           NODE_ENV: test
+          SECRET_KEY: testsss
           MONGODB_VERSION: ${{ matrix.mongodb-version }}
