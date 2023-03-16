@@ -10,6 +10,7 @@ import { SERVER_CORS_OPTIONS } from './config/cors';
 import { config } from './config/environments';
 import { Conversation } from './models/conversations';
 import { User } from './models/users';
+import { router } from './routers';
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use([
 ]);
 
 app.set('port', process.env.port || config.port);
+
+app.use('/api/v1', router);
 
 app.get('/echo', async (_req: Request, res: Response) => {
   const users = await User.find({}).exec();

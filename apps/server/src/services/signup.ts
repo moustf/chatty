@@ -22,12 +22,12 @@ export const registerUser = async ({
     firstName,
     lastName,
     email,
-    hashedPassword,
+    password: hashedPassword,
   });
 
   const createdUser = await getUser({ email }, { password: 0 });
 
   const token = await generateToken({ email });
 
-  return { createdUser, token };
+  return { user: createdUser, token };
 };
