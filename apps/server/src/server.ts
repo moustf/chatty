@@ -8,6 +8,7 @@ import express, { Request, Response } from 'express';
 
 import { SERVER_CORS_OPTIONS } from './config/cors';
 import { config } from './config/environments';
+import { serverErrorHandler, notFoundHandler } from './controllers';
 import { Conversation } from './models/conversations';
 import { User } from './models/users';
 import { router } from './routers';
@@ -39,5 +40,8 @@ if (config.nodeEnv === 'production') {
     res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
   });
 }
+
+app.use(notFoundHandler);
+app.use(serverErrorHandler);
 
 export const httpServer = createServer(app);
