@@ -25,15 +25,6 @@ const usersSchema = new mongoose.Schema<UserInterface>(
     password: {
       type: String,
       required: [true, 'Please provide a password!'],
-      validate: {
-        validator: function (v: string) {
-          return /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&])[a-zA-Z0-9!@#$%^&]{5,}$/.test(
-            v
-          );
-        },
-        message:
-          'Passwords should be at least five characters containing at least one upper case letter, on lower case letter, on number, and one symbol!',
-      },
     },
   },
   { timestamps: true }
