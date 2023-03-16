@@ -6,8 +6,6 @@ const { prodURI, devURI, testURI, nodeEnv } = config;
 
 let connectionString: string | undefined = '';
 
-console.log(nodeEnv);
-
 switch (nodeEnv) {
   case 'production':
     connectionString = prodURI;
@@ -16,7 +14,6 @@ switch (nodeEnv) {
     connectionString = devURI;
     break;
   case 'test':
-    console.log(testURI);
     connectionString = testURI;
 }
 
