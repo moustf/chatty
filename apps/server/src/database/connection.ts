@@ -6,6 +6,8 @@ const { prodURI, devURI, testURI, nodeEnv } = config;
 
 let connectionString: string | undefined = '';
 
+console.log(nodeEnv);
+
 switch (nodeEnv) {
   case 'production':
     connectionString = prodURI;
@@ -14,9 +16,8 @@ switch (nodeEnv) {
     connectionString = devURI;
     break;
   case 'test':
+    console.log(testURI);
     connectionString = testURI;
-  default:
-    throw new Error('Connection string is not provided!');
 }
 
 export const dbConnect = () => mongoose.connect(connectionString as string);
