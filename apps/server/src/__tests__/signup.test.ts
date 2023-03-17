@@ -3,8 +3,6 @@ import request from 'supertest';
 import { app } from '../server';
 
 describe('Testing the signup route', () => {
-  // TODO: you havent verified that the user got created in the user model
-  // TODO: make sure to use async await syntax in tests
   test('Testing the success case, creating the user and returning the user account object', (done) => {
     request(app)
       .post('/api/v1/auth/signup')
@@ -23,8 +21,6 @@ describe('Testing the signup route', () => {
       });
   });
 
-  // TODO: THIS TEST IS BAD because it assumes that the previous test ran successfully,
-  // the data base now gets reset before each test and gets reseeded, instead of one before ALL tests.
   test('Testing the failure case, returning an error for duplicate email account', async () => {
     await request(app)
       .post('/api/v1/auth/signup')
@@ -35,7 +31,6 @@ describe('Testing the signup route', () => {
         password: 'Test@123',
       })
       .expect(201);
-    // TODO: no expects on status code?
 
     const res = await request(app)
       .post('/api/v1/auth/signup')
