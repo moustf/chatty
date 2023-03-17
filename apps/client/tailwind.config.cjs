@@ -9,13 +9,13 @@ const muiBasedUnit = (value) => (
 
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
 
   theme: {
     fontFamily: {
-      sans: ['Public Sans', 'sans-serif'],
+      sans: ['Open Sans', 'sans-serif'],
     },
     colors: {
       primary: {
