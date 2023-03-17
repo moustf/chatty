@@ -18,6 +18,9 @@
     "lint": {},
     "lint:fix": {},
     "test": {
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
         "test-report.html"
       ]

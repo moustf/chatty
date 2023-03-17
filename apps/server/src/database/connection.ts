@@ -15,8 +15,6 @@ switch (nodeEnv) {
     break;
   case 'test':
     connectionString = testURI;
-  default:
-    throw new Error('Connection string is not provided!');
 }
 
 export const dbConnect = () => mongoose.connect(connectionString as string);

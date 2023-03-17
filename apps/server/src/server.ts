@@ -13,7 +13,7 @@ import { Conversation } from './models/conversations';
 import { User } from './models/users';
 import { router } from './routers';
 
-const app = express();
+export const app = express();
 
 app.use([
   compression(),
