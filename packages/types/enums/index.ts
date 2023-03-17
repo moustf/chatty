@@ -1,7 +1,1 @@
-export const STATUS_CODES = {
-  CONFLICT: 409,
-  CREATED: 201,
-  SUCCESS: 200,
-  WRONG_DATA: 400,
-  NOT_FOUND: 404,
-};
+export * from './statusCodes.enum';

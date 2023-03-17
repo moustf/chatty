@@ -31,8 +31,6 @@ export const signupController = async (
       );
     }
 
-    console.log(error);
-
     next(error);
   }
 };

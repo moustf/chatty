@@ -1,0 +1,41 @@
+name: Lint, test and build
+
+on: pull_request
+
+jobs:
+  lint_test_build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 19.x]
+        mongodb-version: ["6.0.3"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "yarn"
+
+      - name: Cache turbo build setup
+        uses: actions/cache@v3
+        with:
+          path: .turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Install project dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Type-check, lint (using turborepo)
+        run: yarn turbo run build lint --cache-dir=.turbo
+
+      - name: Test apps (using turborepo)
+        run: yarn turbo run test --cache-dir=.turbo --concurrency=1
+        env:
+          CI: true
+          NODE_ENV: test
+          SECRET_KEY: testsss
+          MONGODB_VERSION: ${{ matrix.mongodb-version }}
