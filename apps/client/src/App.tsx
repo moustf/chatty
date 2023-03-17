@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1 className="text-h1 shadow-z12 text-primary-light font-bold font-sans underline">Hello world!</h1>
     </div>
   );
 }
