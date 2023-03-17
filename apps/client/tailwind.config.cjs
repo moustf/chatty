@@ -80,7 +80,7 @@ module.exports = {
       },
     },
     fontSize: {
-      h1: '4rem',
+      h1: [pxToRem(40), muiBasedUnit(80 / 64)],
       h2: [pxToRem(32), muiBasedUnit(64 / 48)],
       h3: [pxToRem(24), muiBasedUnit(1.5)],
       h4: [pxToRem(20), muiBasedUnit(1.5)],
