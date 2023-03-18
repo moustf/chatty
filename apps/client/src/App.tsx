@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useConnect } from "./hooks/useConnect";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { SignupPage } from "./pages/Signup";
 import "./App.css";
 
 function App() {
@@ -19,9 +22,16 @@ function App() {
     };
   }, []);
 
+  const router = createBrowserRouter([
+    {
+      path: '/signup',
+      element: <SignupPage />,
+    },
+  ]);
+
   return (
     <div className="App">
-      <h1 className="text-h1 shadow-z12 text-primary-light font-bold font-sans underline">Hello world!</h1>
+      <RouterProvider router={router} />
     </div>
   );
 }
