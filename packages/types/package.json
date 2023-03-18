@@ -17,6 +17,7 @@
   },
   "exports": "./index.ts",
   "dependencies": {
+    "react-hook-form": "^7.43.7",
     "yup": "^1.0.2"
   }
 }
