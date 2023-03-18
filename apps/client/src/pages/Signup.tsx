@@ -18,10 +18,17 @@ import { InputField } from '../components/InputField';
 const baseUrl = import.meta.env.VITE_APP_BASE_URL
 
 export const SignupPage: FC = () => {
-  const { mutate, isError, error } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (user: User) => (
       axios.post(`${baseUrl}/api/v1/auth/signup`, user)
     ),
+    onError: (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error?.response.data.msg + " " + error?.response.status,
+      });
+    },
   });
   const {
     handleSubmit, control, formState: { errors, dirtyFields }
@@ -59,14 +66,6 @@ export const SignupPage: FC = () => {
             : errors.password
               ? 'Password should contain one upper letter, one lower letter, on number, on symbol, and at least 5 characters!'
               : 'The two passwords should match!',
-    });
-  }
-
-  if (isError) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: error?.response.data.msg + " " + error?.response.status,
     });
   }
 
