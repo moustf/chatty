@@ -6,11 +6,11 @@ import { auth } from '../firebaseSetup';
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
-export const useAuthProvider = () => async (provider: string) => {
-  const googleProvider = new GoogleAuthProvider();
-  const facebookProvider = new FacebookAuthProvider();
-  const twitterProvider = new TwitterAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+const twitterProvider = new TwitterAuthProvider();
 
+export const useAuthProvider = () => async (provider: string) => {
   const sendToken = (user: User) => {
     axios.post(`${baseUrl}/api/v1/auth/providers`, user);
   };
