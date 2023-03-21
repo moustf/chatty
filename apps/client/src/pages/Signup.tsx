@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent } from 'react';
+import { FC } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, SubmitHandler, FieldValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,11 +8,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import { SignupWelcomeSection } from '../components/SignupWelcomeSection';
-import { SocialMediaAuthButton } from '../components/SocialMediaAuthButton';
+import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
 import { OrSeparator } from '../components/OrSeparator';
-import GoogleIcon from '../assets/google-icon.svg';
-import FacebookIcon from '../assets/facebook-icon.svg';
-import TwitterIcon from '../assets/twitter-icon.svg';
 import { InputField } from '../components/InputField';
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL
@@ -87,11 +84,7 @@ export const SignupPage: FC = () => {
               .
             </p>
           </section>
-          <section className="w-full flex justify-between items-center gap-10 mb-8">
-            <SocialMediaAuthButton icon={GoogleIcon} />
-            <SocialMediaAuthButton icon={FacebookIcon} />
-            <SocialMediaAuthButton icon={TwitterIcon} />
-          </section>
+          <SocialMediaAuthSection />
           <OrSeparator />
           <form onSubmit={onSignupSubmit}>
             {
