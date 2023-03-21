@@ -19,7 +19,8 @@ export const useAuthProvider = () => async (provider: string) => {
     if (provider === 'google') {
       const googleRes = await signInWithPopup(auth, googleProvider);
       const googleToken = GoogleAuthProvider.credentialFromResult(googleRes)?.idToken;
-      const { displayName, email, providerData } = googleRes.user;
+      const email = googleRes.user.email as string;
+      const { displayName, providerData } = googleRes.user;
 
       const [firstName, lastName] = displayName?.split(' ') as string[];
 
@@ -27,7 +28,8 @@ export const useAuthProvider = () => async (provider: string) => {
     } else if (provider === 'facebook') {
       const facebookRes = await signInWithPopup(auth, facebookProvider);
       const facebookToken = FacebookAuthProvider.credentialFromResult(facebookRes)?.idToken;
-      const { displayName, email, providerData } = facebookRes.user;
+      const email = facebookRes.user.email as string;
+      const { displayName, providerData } = facebookRes.user;
 
       const [firstName, lastName] = displayName?.split(' ') as string[];
 
