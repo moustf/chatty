@@ -11,12 +11,12 @@ export const registerUser = async ({
   email,
   password,
 }: User) => {
-  const userByEmail = await getUserByEmail(email);
+  const userByEmail = await getUserByEmail(email as string);
 
   if (userByEmail)
     throw new GenericError(STATUS_CODES.CONFLICT, 'User already exists!');
 
-  const hashedPassword = await hashPassword(password);
+  const hashedPassword = await hashPassword(password as string);
 
   await createUser({
     firstName,
@@ -27,7 +27,7 @@ export const registerUser = async ({
 
   const createdUser = await getUser({ email }, { password: 0 });
 
-  const token = await generateToken({ email });
+  const token = await generateToken({ email } as { email: string });
 
   return { user: createdUser, token };
 };

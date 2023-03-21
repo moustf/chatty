@@ -24,7 +24,12 @@ const usersSchema = new mongoose.Schema<UserInterface>(
     },
     password: {
       type: String,
-      required: [true, 'Please provide a password!'],
+    },
+    token: {
+      type: String,
+    },
+    provider: {
+      type: String,
     },
   },
   { timestamps: true }
