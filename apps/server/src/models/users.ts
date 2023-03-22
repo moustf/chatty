@@ -38,4 +38,4 @@ const usersSchema = new mongoose.Schema<UserInterface>(
 usersSchema.index({ firstName: 1, lastName: 1 }, { unique: true });
 usersSchema.index({ email: 1 }, { unique: true });
 
-export const User = mongoose.model('User', usersSchema);
+export const User = mongoose.model<UserInterface>('User', usersSchema);
