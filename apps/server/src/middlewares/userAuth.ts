@@ -28,6 +28,7 @@ export const userDataAuth = async (
     const decoded = (await verifyToken(token)) as { email: string };
 
     req.user = decoded;
+    next();
   } catch (error: any) {
     if (error.name === 'invalid signature') {
       next(
