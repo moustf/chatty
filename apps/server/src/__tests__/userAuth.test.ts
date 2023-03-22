@@ -14,7 +14,7 @@ describe('Testing the user auth route for getting the user data', () => {
     const res = await request(app)
       .post('/api/v1/auth')
       .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpbWFAZ21haWwuY29tIiwiaWF0IjoxNjc5NDY0NjQzfQ.rR-Ij2gT-9_q1mlLHbEwYPC3fGNLU3ONJ5o_WSnvha8',
+        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhpbWFAZ21haWwuY29tIiwiaWF0IjoxNjc5NTAxMDQ0fQ.cZuD4gnmWJUTxM0lgqva6SH_OZYoJ1Va_ZxoxpUaRNA',
       ])
       .expect(200);
 
