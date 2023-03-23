@@ -36,4 +36,7 @@ const conversationsSchema = new mongoose.Schema<ConversationInterface>(
   { timestamps: true }
 );
 
-export const Conversation = mongoose.model('Conversation', conversationsSchema);
+export const Conversation = mongoose.model<ConversationInterface>(
+  'Conversation',
+  conversationsSchema
+);

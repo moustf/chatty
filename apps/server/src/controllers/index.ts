@@ -1,6 +1,11 @@
-import { providerAuth } from './auth/providerAuth';
-import { signupController } from './auth/signup';
+import { providerAuth, authController, signupController } from './auth/';
 import { notFoundHandler } from './errors/404';
 import { serverErrorHandler } from './errors/500';
 
-export { signupController, serverErrorHandler, notFoundHandler, providerAuth };
+export {
+  signupController,
+  serverErrorHandler,
+  authController,
+  notFoundHandler,
+  providerAuth,
+};
