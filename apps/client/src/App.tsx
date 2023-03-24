@@ -5,6 +5,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { SignupPage } from "./pages/Signup";
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { selectUerData, setUserData } from './features/auth/authSlice';
 import "./App.css";
 
 function App() {
@@ -24,6 +26,15 @@ function App() {
       socket.removeAllListeners("pong");
     };
   }, []);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserData());
+  }, []);
+
+  const userData = useAppSelector(selectUerData);
+  console.log(userData);
 
   const router = createBrowserRouter([
     {
