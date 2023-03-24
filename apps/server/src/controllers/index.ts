@@ -1,4 +1,9 @@
-import { providerAuth, authController, signupController } from './auth/';
+import {
+  providerAuth,
+  authController,
+  signupController,
+  loginController,
+} from './auth/';
 import { notFoundHandler } from './errors/404';
 import { serverErrorHandler } from './errors/500';
 
@@ -8,4 +13,5 @@ export {
   authController,
   notFoundHandler,
   providerAuth,
+  loginController,
 };
