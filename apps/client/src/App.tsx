@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { SignupPage } from "./pages/Signup";
+import { LoginPage } from './pages/Login';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { selectUerData, setUserData } from './features/auth/authSlice';
 import "./App.css";
@@ -37,6 +38,14 @@ function App() {
   console.log(userData);
 
   const router = createBrowserRouter([
+    {
+      index: true,
+      element: <LoginPage />
+    },
+    {
+      path: '/login',
+      element: <LoginPage />,
+    },
     {
       path: '/signup',
       element: <SignupPage />,
