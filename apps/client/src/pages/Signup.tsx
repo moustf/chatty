@@ -7,7 +7,7 @@ import { userDataSchema } from '@chatty/types';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-import { SignupWelcomeSection } from '../components/SignupWelcomeSection';
+import { SignupLoginWelcomeSection } from '../components/SignupLoginWelcomeSection';
 import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
 import { OrSeparator } from '../components/OrSeparator';
 import { InputField } from '../components/InputField';
@@ -68,8 +68,8 @@ export const SignupPage: FC = () => {
 
   return (
     <div className="w-full h-screen flex">
-    <SignupWelcomeSection />
-    <main
+      <SignupLoginWelcomeSection text="Welcome to Chatty!" />
+      <main
         className="w-full h-screen flex justify-center lg:w-2/3"
       >
         <section
@@ -112,8 +112,8 @@ export const SignupPage: FC = () => {
               disabled={!isValid}
             >Sign Up</button>
           </form>
-      </section>
-    </main>
+        </section>
+      </main>
   </div>
   );
 };
