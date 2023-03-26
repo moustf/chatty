@@ -29,8 +29,6 @@ export const loginController = async (
       );
     }
 
-    console.log(error, 'login error');
-
     return next(error);
   }
 };
