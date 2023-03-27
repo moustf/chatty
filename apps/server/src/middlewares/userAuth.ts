@@ -21,13 +21,13 @@ export const userDataAuth = async (
     const user = await getUser({ token });
 
     if (user?.email) {
-      req.user = { email: user.email };
+      req.user = { id: user._id, email: user.email };
       next();
     }
 
     const decoded = (await verifyToken(token)) as { email: string };
 
-    req.user = decoded;
+    req.user = { id: user?.id, ...decoded };
     next();
   } catch (error: any) {
     if (error.name === 'invalid signature') {

@@ -18,7 +18,7 @@ export const registerUser = async ({
 
   const hashedPassword = await hashPassword(password as string);
 
-  await createUser({
+  const user = await createUser({
     firstName,
     lastName,
     email,
@@ -27,7 +27,10 @@ export const registerUser = async ({
 
   const createdUser = await getUser({ email }, { password: 0 });
 
-  const token = await generateToken({ email } as { email: string });
+  const token = await generateToken({ id: user.id, email } as {
+    id: number;
+    email: string;
+  });
 
   return { user: createdUser, token };
 };
