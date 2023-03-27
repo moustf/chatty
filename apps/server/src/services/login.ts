@@ -27,7 +27,7 @@ export const loginUser = async (email: string, password: string) => {
     );
   }
 
-  const token = await generateToken({ email });
+  const token = await generateToken({ id: user.id, email });
 
   return { token, user };
 };

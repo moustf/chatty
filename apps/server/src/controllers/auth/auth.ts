@@ -4,8 +4,11 @@ export const authController = (req: any, res: Response, next: NextFunction) => {
   try {
     const { user } = req;
 
-    res.json({ msg: 'The user is authenticated successfully!', data: user });
+    return res.json({
+      msg: 'The user is authenticated successfully!',
+      data: user,
+    });
   } catch (error: any) {
-    next(error);
+    return next(error);
   }
 };

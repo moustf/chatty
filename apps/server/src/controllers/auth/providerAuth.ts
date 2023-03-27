@@ -17,7 +17,7 @@ export const providerAuth = async (
 
     await User.updateOne({ email }, req.body, { upsert: true });
 
-    res
+    return res
       .status(STATUS_CODES.CREATED)
       .cookie('token', token, { httpOnly: true })
       .json({
@@ -30,7 +30,7 @@ export const providerAuth = async (
       });
   } catch (error) {
     if (error.name === 'ValidationError') {
-      next(
+      return next(
         new GenericError(
           STATUS_CODES.WRONG_DATA,
           'The user has provided wrong data!'
@@ -38,6 +38,6 @@ export const providerAuth = async (
       );
     }
 
-    next(error);
+    return next(error);
   }
 };

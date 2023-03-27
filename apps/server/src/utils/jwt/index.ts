@@ -4,7 +4,7 @@ import { config } from '../../config/environments';
 
 const { secretKey } = config;
 
-export const generateToken = async (payload: { email: string }) =>
+export const generateToken = async (payload: { id: number; email: string }) =>
   new Promise((res, rej) => {
     jwt.sign(payload, secretKey as string, (error, token) => {
       if (error) rej(error);

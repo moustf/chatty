@@ -23,7 +23,7 @@ export const signupController = async (
       .json({ msg: "The user's account is created successfully!", data: user });
   } catch (error) {
     if (error.name === 'ValidationError') {
-      next(
+      return next(
         new GenericError(
           STATUS_CODES.WRONG_DATA,
           'The user has provided wrong data!'
@@ -31,6 +31,6 @@ export const signupController = async (
       );
     }
 
-    next(error);
+    return next(error);
   }
 };
