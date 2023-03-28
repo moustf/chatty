@@ -15,7 +15,7 @@ export const MainHeader: FC = () => {
       className="h-24 flex justify-between items-center mx-8 lg:mx-20"
     >
       <MainHeaderAddUser type="large" />
-      <h1 className="text-h1 font-bold xs:flex-1 sm:flex-1 md:flex-none">Chatty</h1>
+      <h1 className="text-h1 font-bold flex-1 lg:flex-none">Chatty</h1>
       {!isMenuClicked && <NotificationsMenu type="small" />}
       <MainHeaderProfile type="large" />
       <img
