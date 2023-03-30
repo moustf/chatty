@@ -15,15 +15,32 @@ import { InputField } from '../components/InputField';
 const baseUrl = import.meta.env.VITE_APP_BASE_URL
 
 export const SignupPage: FC = () => {
+  axios.defaults.withCredentials = true;
+
   const { mutate } = useMutation({
     mutationFn: (user: User) => (
-      axios.post(`${baseUrl}/api/v1/auth/signup`, user)
+      axios.post(`${baseUrl}/api/v1/auth/signup`, user, {
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+      })
     ),
     onError: (error: any) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: error?.response.data.msg + " " + error?.response.status,
+      });
+    },
+    onSuccess: () => {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'The user has account has been created successfully!',
+        showConfirmButton: false,
+        timer: 1500
       });
     },
   });
