@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const userData = useAppSelector(selectUerData);
-  console.log(userData);
+  console.log(userData?.email);
 
   const router = createBrowserRouter([
     {

@@ -14,9 +14,17 @@ import { InputField } from '../components/InputField';
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 export const LoginPage: FC = () => {
+  axios.defaults.withCredentials = true;
+
   const { mutate } = useMutation({
     mutationFn: (data: LoginData) => (
-      axios.post(`${baseUrl}/api/v1/auth/login`, data)
+      axios.post(`${baseUrl}/api/v1/auth/login`, data, {
+        withCredentials: true,
+        headers: {
+          'content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+      })
     ),
     onError: (error: any) => {
       Swal.fire({

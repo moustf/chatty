@@ -9,7 +9,7 @@ export const serverErrorHandler = (
   next: NextFunction
 ) => {
   // eslint-disable-next-line no-console
-  console.log(error, 'Server Error Controller!');
+  // console.log(error, 'Server Error Controller!');
 
   const { status, message } = error;
 
