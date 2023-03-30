@@ -5,7 +5,7 @@ import axios from 'axios';
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 const initialState = {
-  userData: { email: '' },
+  userData: { id: '', email: '', iat: 0 },
   isLoading: false,
   error: '',
 };
@@ -64,7 +64,7 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(clearUserData.fulfilled, (state) => {
-      state.userData = { email: '' };
+      state.userData = { id: '', email: '', iat: 0 };
       state.isLoading = false;
     });
 
