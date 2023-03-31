@@ -5,7 +5,7 @@ import axios from 'axios';
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 const initialState = {
-  userData: { email: '' },
+  userData: { id: '', email: '', iat: 0 },
   isLoading: false,
   error: '',
 };
@@ -37,10 +37,14 @@ export const selectError = createSelector(
 
 // ? Thunk function and its fetcher helper functions.
 
-const fetchUserData = () => axios.post(`${baseUrl}/api/v1/auth/`);
+const fetchUserData = () => axios.post(`${baseUrl}/api/v1/auth/`, {}, {
+  withCredentials: true,
+});
 export const setUserData = createAsyncThunk('auth/setUserData', fetchUserData);
 
-const logout = () => axios.post(`${baseUrl}/api/v1/auth/logout`);
+const logout = () => axios.post(`${baseUrl}/api/v1/auth/logout`, {}, {
+  withCredentials: true,
+});
 export const clearUserData = createAsyncThunk('auth/clearUserData', logout);
 
 // ! The main auth slice.
@@ -50,7 +54,7 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(setUserData.fulfilled, (state, action) => {
-      state.userData = action.payload.data.userData;
+      state.userData = action.payload.data.data;
       state.isLoading = false;
     });
 
@@ -60,7 +64,7 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(clearUserData.fulfilled, (state) => {
-      state.userData = { email: '' };
+      state.userData = { id: '', email: '', iat: 0 };
       state.isLoading = false;
     });
 
