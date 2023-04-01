@@ -5,3 +5,4 @@ export * from './LoginData';
 export * from './messages';
 export * from './redux';
 export * from './User';
+export * from './Users';
