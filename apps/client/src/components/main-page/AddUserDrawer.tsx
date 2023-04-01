@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { UsersInterface } from '@chatty/types';
 import axios from 'axios';
@@ -11,6 +11,8 @@ const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
   axios.defaults.withCredentials = true;
 
+  const controller = new AbortController();
+
   const [query, setQuery] = useState<string>('');
   const debouncedQuery = useDebouncedValue(query);
   const [users, setUsers] = useState<UsersInterface[] | []>([]);
@@ -19,13 +21,12 @@ export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
     mutationFn: (data: string) => (
       axios.get(`${baseUrl}/api/v1/user/find?q=${data}`, {
         withCredentials: true,
+        signal: controller.signal,
       })
     ),
   });
 
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-
+  useEffect(() => {
     if (debouncedQuery) {
       mutate(debouncedQuery);
     }
@@ -33,8 +34,10 @@ export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
     setUsers(data?.data.data);
 
     if (error) setUsers([]);
-    if (e.target.value === '') setUsers([]);
-  };
+    if (query === '') setUsers([]);
+
+    return () => controller.abort();
+  }, [debouncedQuery])
 
   return (
     <section
@@ -47,7 +50,7 @@ export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
         type="search"
         placeholder='Search for Users from here'
         value={query}
-        onChange={onInputChange}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
       />
       <div className="w-4/5 h-2 rounded-lg bg-grey-300" />
       <section className="w-full h-content p-4 flex flex-col justify-center align-center gap-10">
