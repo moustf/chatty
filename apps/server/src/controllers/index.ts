@@ -9,6 +9,7 @@ import {
   getUserByIdController,
   checkUserPassword,
   searchForUsers,
+  changeUserPassword,
 } from './user';
 
 export {
@@ -21,4 +22,5 @@ export {
   getUserByIdController,
   checkUserPassword,
   searchForUsers,
+  changeUserPassword,
 };
