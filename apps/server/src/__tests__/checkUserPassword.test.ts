@@ -3,19 +3,25 @@ import request from 'supertest';
 import { app } from '../server';
 
 describe('Testing the check user password route.', () => {
-  test('In the success case, the route should return 200 status code and the success message and true as a data', (done) => {
-    request(app)
-      .get('/api/v1/user/password')
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTdmNzA4ZWQwYzU3MDU0MDA4ZTMwMCIsImVtYWlsIjoibXVzdGFmYUBnbWFpbC5jb20iLCJpYXQiOjE2ODA0NDA1Mjl9.bmNwN_wk_to_3JeQPOqDfMadacjg-ydQT5wmhIce5Eo',
-      ])
-      .expect(200)
-      .end((error, res) => {
-        if (error) return done(error);
+  test('In the success case, the route should return 200 status code and the success message and true as a data', async () => {
+    const user = await request(app).post('/api/v1/auth/signup').send({
+      firstName: 'test2',
+      lastName: 'test2',
+      email: 'test2@gmail.com',
+      password: 'Test@123',
+    });
 
-        expect(res.body.data).toBe(true);
-        return done();
-      });
+    const token = user.header['set-cookie'][0].split('=')[1].split(';')[0];
+
+    const res = await request(app)
+      .get('/api/v1/user/password')
+      .set('Cookie', [`token=${token}`])
+      .expect(200);
+
+    expect(res.body.data).toBe(true);
+    expect(res.body.msg).toBe(
+      'The user has a password assigned to his account!'
+    );
   });
 
   test('In the failure case, the route should return 404 status code and the not found message', (done) => {
