@@ -23,7 +23,7 @@ describe('Testing the signup route', () => {
   });
 
   test('Testing the failure case, the route should return not found msg and the 404 status code', async () => {
-    const token = await generateToken({ id: 93739, email: 'test@gmail.com' });
+    const token = await generateToken({ id: '93739', email: 'test@gmail.com' });
 
     const res = await request(app)
       .get('/api/v1/user')

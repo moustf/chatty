@@ -8,7 +8,7 @@ import { verifyToken } from '../utils/jwt';
 
 export const userDataAuth = async (
   req: any,
-  _res: Response,
+  res: Response,
   next: NextFunction
 ) => {
   try {
@@ -37,6 +37,11 @@ export const userDataAuth = async (
           'The token provided is not valid!'
         )
       );
+    } else if (error.name === 'JsonWebTokenError') {
+      return res.json({
+        msg: 'The user has no password on the system!',
+        data: false,
+      });
     }
 
     next(error);

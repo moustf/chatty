@@ -5,6 +5,11 @@ import {
   loginController,
 } from './auth/';
 import { notFoundHandler, serverErrorHandler } from './errors';
+import {
+  getUserByIdController,
+  checkUserPassword,
+  searchForUsers,
+} from './user';
 
 export {
   signupController,
@@ -13,4 +18,7 @@ export {
   notFoundHandler,
   providerAuth,
   loginController,
+  getUserByIdController,
+  checkUserPassword,
+  searchForUsers,
 };

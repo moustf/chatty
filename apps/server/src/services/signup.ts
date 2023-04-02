@@ -27,10 +27,7 @@ export const registerUser = async ({
 
   const createdUser = await getUser({ email }, { password: 0 });
 
-  const token = await generateToken({ id: user.id, email } as {
-    id: number;
-    email: string;
-  });
+  const token = await generateToken({ id: user.id, email });
 
   return { user: createdUser, token };
 };
