@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 
 import { NotificationsMenu } from './NotificationsMenu';
 import AvatarImage from '../../assets/Avatar.svg';
+import { UserProfileDrawer } from './UserProfileDrawer';
 
 export const MainHeaderProfile: FC<{ type: string }> = ({ type }) => {
   const [isProfileClicked, setIsProfileClicked] = useState<boolean>(false);
@@ -16,6 +17,7 @@ export const MainHeaderProfile: FC<{ type: string }> = ({ type }) => {
       >
         <img src={AvatarImage} width="52" height="52" alt="avatar" />
       </div>
+      {isProfileClicked && <UserProfileDrawer isVisible={isProfileClicked} />}
     </section>
   );
 }
