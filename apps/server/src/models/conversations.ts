@@ -33,7 +33,7 @@ const conversationsSchema = new mongoose.Schema<ConversationInterface>(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );
 
 export const Conversation = mongoose.model<ConversationInterface>(

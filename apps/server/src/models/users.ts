@@ -32,7 +32,7 @@ const usersSchema = new mongoose.Schema<UserInterface>(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );
 
 usersSchema.index({ firstName: 1, lastName: 1 }, { unique: true });

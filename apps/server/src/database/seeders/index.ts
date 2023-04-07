@@ -38,6 +38,8 @@ const collections = [
         email: 'mustafa@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW', // Root@123
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('123ea40720dcfa02e0ae42db'),
@@ -46,6 +48,8 @@ const collections = [
         email: 'imad@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('456ea40720dcfa02e0ae42db'),
@@ -54,6 +58,8 @@ const collections = [
         email: 'rashad@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('8977f708ed0c57054008e400'),
@@ -62,6 +68,8 @@ const collections = [
         email: 'hani@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('2587f708ed0c57054008e500'),
@@ -70,6 +78,8 @@ const collections = [
         email: 'heba@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('789ea40720dcfa02e0ae42db'),
@@ -78,6 +88,8 @@ const collections = [
         email: 'kamal@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('147ea40720dcfa02e0ae42db'),
@@ -86,6 +98,8 @@ const collections = [
         email: 'lina@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('6411ec3d1feb9523d5036e9d'),
@@ -94,6 +108,8 @@ const collections = [
         email: 'tamara@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('6411bd24231678cfdf841048'),
@@ -102,6 +118,8 @@ const collections = [
         email: 'arwa@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('6411bd4547dc76574443c75a'),
@@ -110,6 +128,8 @@ const collections = [
         email: 'nada@gmail.com',
         password:
           '$2a$12$Gel7UtDBU1oP13rc5hu.juVNcnrkxQabnFgYw7OYXLqE74vgNFuhW',
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     ],
   },
@@ -131,6 +151,8 @@ const collections = [
             sender: '123ea40720dcfa02e0ae42db',
           },
         ],
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('6411ec8cd7b346af1913d46d'),
@@ -147,6 +169,8 @@ const collections = [
             sender: '456ea40720dcfa02e0ae42db',
           },
         ],
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('6411bfa23854cf0b8f4ddea8'),
@@ -163,6 +187,8 @@ const collections = [
             sender: '456ea40720dcfa02e0ae42db',
           },
         ],
+        created_at: new Date(),
+        updated_at: new Date(),
       },
       {
         _id: new mongoose.Types.ObjectId('6411eca56e9d4cac192a49bd'),
@@ -195,6 +221,8 @@ const collections = [
             sender: '147ea40720dcfa02e0ae42db',
           },
         ],
+        created_at: new Date(),
+        updated_at: new Date(),
       },
     ],
   },
