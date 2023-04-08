@@ -13,11 +13,12 @@ export const changeUserPassword = async (
 ) => {
   try {
     const { id } = req.user;
-    const { oldPassword, newPassword } = req.body;
+    const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
     await userOldNewPasswordsSchema.validate({
       oldPassword,
       newPassword,
+      confirmNewPassword,
     });
 
     const user = await getUser({ _id: id });
