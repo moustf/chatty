@@ -138,7 +138,10 @@ const collections = [
     documents: [
       {
         _id: new mongoose.Types.ObjectId('6411bf90d1d20cd44e2911b9'),
-        users: ['6357f708ed0c57054008e300', '123ea40720dcfa02e0ae42db'],
+        users: [
+          new mongoose.Types.ObjectId('6357f708ed0c57054008e300'),
+          new mongoose.Types.ObjectId('123ea40720dcfa02e0ae42db'),
+        ],
         messages: [
           {
             type: 'text',
@@ -156,7 +159,10 @@ const collections = [
       },
       {
         _id: new mongoose.Types.ObjectId('6411ec8cd7b346af1913d46d'),
-        users: ['456ea40720dcfa02e0ae42db', '8977f708ed0c57054008e400'],
+        users: [
+          new mongoose.Types.ObjectId('456ea40720dcfa02e0ae42db'),
+          new mongoose.Types.ObjectId('8977f708ed0c57054008e400'),
+        ],
         messages: [
           {
             type: 'text',
@@ -174,7 +180,10 @@ const collections = [
       },
       {
         _id: new mongoose.Types.ObjectId('6411bfa23854cf0b8f4ddea8'),
-        users: ['456ea40720dcfa02e0ae42db', '8977f708ed0c57054008e400'],
+        users: [
+          new mongoose.Types.ObjectId('456ea40720dcfa02e0ae42db'),
+          new mongoose.Types.ObjectId('8977f708ed0c57054008e400'),
+        ],
         messages: [
           {
             type: 'text',
@@ -193,10 +202,10 @@ const collections = [
       {
         _id: new mongoose.Types.ObjectId('6411eca56e9d4cac192a49bd'),
         users: [
-          '2587f708ed0c57054008e500',
-          '6411bd4547dc76574443c75a',
-          '6411bd24231678cfdf841048',
-          '147ea40720dcfa02e0ae42db',
+          new mongoose.Types.ObjectId('6357f708ed0c57054008e300'),
+          new mongoose.Types.ObjectId('6411bd4547dc76574443c75a'),
+          new mongoose.Types.ObjectId('6411bd24231678cfdf841048'),
+          new mongoose.Types.ObjectId('147ea40720dcfa02e0ae42db'),
         ],
         messages: [
           {
@@ -221,6 +230,7 @@ const collections = [
             sender: '147ea40720dcfa02e0ae42db',
           },
         ],
+        name: 'Awesome People',
         created_at: new Date(),
         updated_at: new Date(),
       },
