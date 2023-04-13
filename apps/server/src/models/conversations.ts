@@ -27,6 +27,13 @@ const conversationsSchema = new mongoose.Schema<ConversationInterface>(
           type: mongoose.Schema.Types.ObjectId,
           required: true,
         },
+        createdAt: {
+          type: mongoose.Schema.Types.Date,
+          required: true,
+        },
+        updatedAt: {
+          type: mongoose.Schema.Types.Date,
+        },
       },
     ],
     name: {
