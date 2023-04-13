@@ -4,22 +4,23 @@ import { app } from '../server';
 
 describe('Testing the get users conversations route', () => {
   // ? This test is maybe going to fail in the GitHub Actions tests.
-  test("Testing the success case, the route should return the user's conversations and the 200 status code with the conversations array", (done) => {
-    request(app)
-      .get('/api/v1/user/conversations')
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNTdmNzA4ZWQwYzU3MDU0MDA4ZTMwMCIsImVtYWlsIjoibXVzdGFmYUBnbWFpbC5jb20iLCJpYXQiOjE2ODEzMDgzNDV9.jhkjkz2dEf4ofq-5JmdoB8chkktRIz1wYh9ghB14or4',
-      ])
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
+  test("Testing the success case, the route should return the user's conversations and the 200 status code with the conversations array", async () => {
+    const user = await request(app).post('/api/v1/auth/login').send({
+      email: 'mustafa@gmail.com',
+      password: 'Root@123',
+    });
 
-        expect(res.body.msg).toBe(
-          "The user's conversations did return successfully!"
-        );
-        expect(Array.isArray(res.body.data)).toBe(true);
-        return done();
-      });
+    const token = user.header['set-cookie'][0].split('=')[1].split(';')[0];
+
+    const res = await request(app)
+      .get('/api/v1/user/conversations')
+      .set('Cookie', [`token=${token}`])
+      .expect(200);
+
+    expect(res.body.msg).toBe(
+      "The user's conversations did return successfully!"
+    );
+    expect(Array.isArray(res.body.data)).toBe(true);
   });
 
   test('Testing the failure case, the route should return not found msg and the 404 status code', async () => {
