@@ -7,6 +7,8 @@ export type Conversation = {
     text?: string;
     image?: string;
     sender: mongoose.Schema.Types.ObjectId;
+    createdAt: mongoose.Schema.Types.Date;
+    updatedAt: mongoose.Schema.Types.Date;
   }[];
   name?: string;
 };

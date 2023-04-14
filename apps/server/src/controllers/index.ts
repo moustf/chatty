@@ -10,6 +10,7 @@ import {
   checkUserPassword,
   searchForUsers,
   changeUserPassword,
+  getUserConversations,
 } from './user';
 
 export {
@@ -23,4 +24,5 @@ export {
   checkUserPassword,
   searchForUsers,
   changeUserPassword,
+  getUserConversations,
 };
