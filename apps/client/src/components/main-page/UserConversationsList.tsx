@@ -17,7 +17,7 @@ export const UserConversationList: FC = () => {
   });
 
   return (
-    <section className="w-1/5 h-screen flex flex-col gap-8 px-4 py-8">
+    <section className="w-full lg:w-1/3 xl:w-1/4 h-screen flex flex-col gap-8 px-4 py-8">
       {
         data?.data.data.map((con: any) => {
           const name = con.name || `${con.users[0].firstName} ${con.users[0].lastName || ''}`;
@@ -26,6 +26,7 @@ export const UserConversationList: FC = () => {
 
           return (
             <UserConversationBox
+              id={con.id}
               type={con.users.length > 1 ? 'group' : 'individual'}
               name={name}
               message={message}
