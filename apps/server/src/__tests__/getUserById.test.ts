@@ -1,22 +1,21 @@
 import request from 'supertest';
 
 import { app } from '../server';
+import { getUserTokenFromSignup } from '../utils/helpers';
 import { generateToken } from '../utils/jwt';
 
-describe('Testing the signup route', () => {
+describe('Testing the get user by id route', () => {
   test('Testing the success case, the route should return the users info and the 200 status code', async () => {
-    const user = await request(app).post('/api/v1/auth/signup').send({
-      firstName: 'test',
-      lastName: 'test',
-      email: 'test@gmail.com',
-      password: 'Test@123',
-    });
-
-    const token = user.header['set-cookie'][0].split('=')[1].split(';')[0];
+    const testToken = await getUserTokenFromSignup(
+      'test',
+      'test',
+      'test@gmail.com',
+      'Test@123'
+    );
 
     const res = await request(app)
       .get('/api/v1/user')
-      .set('Cookie', [`token=${token}`])
+      .set('Cookie', [`token=${testToken}`])
       .expect(200);
 
     expect(res.body.data.email).toBe('test@gmail.com');
