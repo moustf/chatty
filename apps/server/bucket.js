@@ -3,7 +3,7 @@ require('dotenv').config({
   path: '/home/moustf/projects_personal/chatty/apps/server/.env',
 });
 
-// ? Step 2: The s3Client function validates your request adn directs it to your Space's specified endpoint using the AWS SDK.
+// ? The s3Client function validates your request adn directs it to your Space's specified endpoint using the AWS SDK.
 const s3Client = new S3Client({
   endpoint: 'https://chatty-bucket.fra1.digitaloceanspaces.com',
   forcePathStyle: false,
@@ -14,19 +14,19 @@ const s3Client = new S3Client({
   },
 });
 
-// ? Step 3: Define the parameters for the object you want to upload.
-const params = {
-  Bucket: '_exp',
-  Key: 'hello-world.txt',
-  Body: 'Hello, World!',
-  ACL: 'private', // Access Control Lists.
-  Metadata: {
-    'x-amx-meta-description': 'This is just an experimentally upload',
-  },
-};
+// ? Define a function that uploads your object using SDK's PutObjectCommand object and catch any errors.
+const uploadObject = async (fileName, fileData) => {
+  // ? Define the parameters for the object you want to upload.
+  const params = {
+    Bucket: '_static',
+    Key: fileName,
+    Body: fileData,
+    ACL: 'private', // Access Control Lists.
+    Metadata: {
+      'x-amx-meta-description': 'Uploading static files.',
+    },
+  };
 
-// ? Step 4: Define a function that uploads your object using SDK's PutObjectCommand object and catch any errors.
-const uploadObject = async () => {
   try {
     const data = await s3Client.send(new PutObjectCommand(params));
     console.log(
@@ -39,5 +39,7 @@ const uploadObject = async () => {
   }
 };
 
-// ? Step 5: Call the uploadedObject function.
-uploadObject();
+// uploadObject('hi-all.txt', 'Hi All, This Is Mustafa Salem!');
+// uploadObject('marhaba-all.txt', 'Marhaba All, This Is Mustafa Salem!');
+
+module.exports = { uploadObject };
