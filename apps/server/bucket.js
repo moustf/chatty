@@ -1,7 +1,9 @@
+const { join } = require('path');
+
 const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3');
-require('dotenv').config({
-  path: '/home/moustf/projects_personal/chatty/apps/server/.env',
-});
+
+process.chdir(join(process.cwd(), 'apps', 'server'));
+require('dotenv').config();
 
 // ? The s3Client function validates your request adn directs it to your Space's specified endpoint using the AWS SDK.
 const s3Client = new S3Client({
