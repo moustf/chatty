@@ -3,7 +3,7 @@ import request from 'supertest';
 import { app } from '../server';
 import { getUserTokenFromSignup } from '../utils/helpers/signupHelper';
 
-describe("Testing the route of changing the user's password route", () => {
+describe("Testing the route of changing the user's password", () => {
   test('In the success case, the route should return 200 status code, success message and true as a data', async () => {
     const testToken = await getUserTokenFromSignup(
       'test2',
