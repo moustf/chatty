@@ -4,6 +4,7 @@ import {
   signupController,
   loginController,
 } from './auth/';
+import { getConversation } from './conversations';
 import { notFoundHandler, serverErrorHandler } from './errors';
 import {
   getUserByIdController,
@@ -25,4 +26,5 @@ export {
   searchForUsers,
   changeUserPassword,
   getUserConversations,
+  getConversation,
 };
