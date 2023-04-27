@@ -10,6 +10,7 @@ import { MainPage } from './pages/Main';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { selectUerData, setUserData } from './features/auth/authSlice';
 import "./App.css";
+import { ChatWindow } from './components/main-page/ChatWindow';
 
 function App() {
   const { socket } = useConnect();
@@ -54,6 +55,12 @@ function App() {
     {
       path: '/main',
       element: <MainPage />,
+      children: [
+        {
+          path: 'chat/:chatId',
+          element: <ChatWindow />
+        },
+      ],
     },
   ]);
 
