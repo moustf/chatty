@@ -30,7 +30,9 @@ describe("Testing the route of getting a single conversation by it's id", () => 
       .set('Cookie', [`token=${mustafaToken}`])
       .expect(400);
 
-    expect(typeof res.body).toBe('object');
+    expect(res.body.msg).toBe(
+      "The user didn't provide a chat id or provided an invalid chat id."
+    );
   });
 
   test('In the failure case, the route should return 204 status code', async () => {
