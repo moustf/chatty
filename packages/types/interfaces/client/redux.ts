@@ -1,9 +1,8 @@
 export type Payload = {
-  userData: {
-    id: string;
-    email: string;
-    iat: number;
+  auth: {
+    userData: { id: string; email: string; iat: number };
+    isLoading: boolean;
+    error: string;
   };
-  isLoading: boolean;
-  error: any;
+  chat: { isChatsListShown: boolean };
 };

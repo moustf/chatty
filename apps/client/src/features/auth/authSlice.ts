@@ -25,13 +25,13 @@ export const createErrorAction = (payload: any): { type: string; payload: any } 
 
 export const selectUerData = createSelector(
   // * First, we pass one or more "input selector" functions.
-  (state: Payload) => state.userData,
+  (state: Payload) => state.auth.userData,
   // * Then we return output, we can do any logic with it.
   (userData: { email: string }) => userData,
 );
 
 export const selectError = createSelector(
-  (state: Payload) => state.error,
+  (state: Payload) => state.auth.error,
   (error: any) => error,
 );
 
