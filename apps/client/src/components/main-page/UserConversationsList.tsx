@@ -3,15 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { UserConversationBox } from './UserConversationBox';
+import { useAppSelector } from '../../hooks/redux';
+import { selectIsChatsListShown } from '../../features/chat/chatSlice';
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
-export const UserConversationList: FC<
-  {
-    isChatsListShown: boolean,
-    setIsChatsListShown: Dispatch<SetStateAction<boolean>>,
-  }
-> = ({ isChatsListShown, setIsChatsListShown }) => {
+export const UserConversationList: FC = () => {
   const { data } = useQuery({
     queryKey: ['getUserConversations'],
     queryFn: () => (
@@ -21,9 +18,11 @@ export const UserConversationList: FC<
     ),
   });
 
+  const isChatsListShown = useAppSelector(selectIsChatsListShown);
+
   return (
     <section
-      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 flex flex-col gap-8 px-4 py-8 ${!isChatsListShown && 'hidden'} lg:flex`}
+      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 shadow-z24 flex flex-col gap-8 px-4 py-8 ${!isChatsListShown && 'hidden'} lg:flex`}
     >
       {
         data?.data.data.map((con: any) => {
@@ -40,7 +39,6 @@ export const UserConversationList: FC<
               message={message}
               createdAt={lastUpdate}
               usersNumber={con.users.length}
-              setIsChatsListShown={setIsChatsListShown}
             />
           );
         })

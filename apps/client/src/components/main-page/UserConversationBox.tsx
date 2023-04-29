@@ -4,11 +4,12 @@ import { UserConversation } from '@chatty/types';
 
 import { ConversationsImage } from './ConversationsImage';
 import { formatTime } from '../../utils/formatTime';
+import { useAppDispatch } from '../../hooks/redux';
+import { setIsChatListShownToFalse } from '../../features/chat/chatSlice';
 
-export const UserConversationBox: FC<
-  UserConversation & { setIsChatsListShown: Dispatch<SetStateAction<boolean>> }
-> = ({ id, name, message, type, createdAt, usersNumber, setIsChatsListShown }) => {
+export const UserConversationBox: FC<UserConversation> = ({ id, name, message, type, createdAt, usersNumber }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -16,7 +17,7 @@ export const UserConversationBox: FC<
       className="w-full py-8 px-4 flex flex-col gap-12 hover:bg-grey-200 cursor-pointer"
       onClick={() => {
         navigate(`/main/chat/${id}`);
-        setIsChatsListShown(false);
+        dispatch(setIsChatListShownToFalse());
       }}
     >
     <div className="w-full flex justify-between items-center">

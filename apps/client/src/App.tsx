@@ -9,8 +9,8 @@ import { LoginPage } from './pages/Login';
 import { MainPage } from './pages/Main';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { selectUerData, setUserData } from './features/auth/authSlice';
-import "./App.css";
 import { ChatWindow } from './components/main-page/ChatWindow';
+import "./App.css";
 
 function App() {
   const { socket } = useConnect();
