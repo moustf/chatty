@@ -15,7 +15,7 @@ export const ChatWindowHeading: FC<ConversationsImageHeading> = ({
   return (
     <section className="w-full h-24 flex justify-between items-center px-8 shadow-z8">
       <section
-        className="w-2/5 lg:w-1/2 xl:w-[35%] flex items-center gap-8"
+        className="w-[85%] lg:w-1/2 xl:w-[35%] flex items-center gap-8"
       >
         <div
           className="w-8 h-8 rounded-full border border-solid border-black cursor-pointer flex justify-center items-center hover:border-0 hover:bg-grey"
@@ -33,7 +33,7 @@ export const ChatWindowHeading: FC<ConversationsImageHeading> = ({
           name={name}
           usersNumber={usersNumber}
         />
-        <h3 className="xl:w-[12rem] text-left text-h3 lg:text-h5 xl:text-h3 text-black text-black">{name}</h3>
+        <h3 className="w-[15rem] xl:w-[12rem] text-left text-[1rem] sm:text-[1.5rem] lg:text-h5 xl:text-h3 text-black text-black">{name}</h3>
       </section>
       <img
         src={SeeMoreIcon}

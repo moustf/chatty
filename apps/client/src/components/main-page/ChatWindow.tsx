@@ -6,6 +6,7 @@ import { selectIsChatsListShown } from '../../features/chat/chatSlice';
 import axios from 'axios';
 
 import { ChatWindowHeading } from './chatWindowHeading';
+import { SendChatMessage } from './SendChatMessage';
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
@@ -25,13 +26,14 @@ export const ChatWindow: FC = () => {
   return (
     <section
       id={chatId}
-      className={`w-full md:w-full lg:w-2/3 xl:w-3/4 py-6 ${isChatsListShown && 'hidden'} lg:block`}
+      className={`w-full md:w-full lg:w-2/3 xl:w-3/4 flex flex-col justify-between py-6 ${isChatsListShown && 'hidden'} lg:flex`}
     >
       <ChatWindowHeading
         type={chatData?.users.length > 1 ? 'group' : 'individual'}
         name={name}
         usersNumber={chatData?.users.length}
       />
+      <SendChatMessage />
     </section>
   );
 };
