@@ -2,9 +2,11 @@ import { FC, useState } from 'react';
 
 import AttachIcon from '../../assets/attach.svg';
 import SendIcon from '../../assets/send.svg';
+import { AttachFile } from './AttachFile';
 
 export const SendChatMessage: FC = () => {
   const [message, setMessage] = useState<string>('');
+  const [isAttachFileShown, setIsAttachFileShown] = useState<boolean>(false);
 
   return (
     <section
@@ -25,13 +27,19 @@ export const SendChatMessage: FC = () => {
         <section
           className="w-[25%] md:w-[10%] flex justify-between items-center"
         >
-          <img
-            src={AttachIcon}
-            alt="attach icon"
-            width="30"
-            height="30"
-            className="cursor-pointer"
-          />
+          <div
+            className="w-11 h-11 rounded-full cursor-pointer bg-[#4C7CFD] hover:bg-[#0044FC] flex justify-center items-center relative"
+          >
+            <img
+              src={AttachIcon}
+              alt="attach icon"
+              width="30"
+              height="30"
+              className="cursor-pointer"
+              onClick={() => setIsAttachFileShown((prevValue) => !prevValue)}
+            />
+            <AttachFile isAttachMessageShow={isAttachFileShown} />
+          </div>
           <div className="w-11 h-11 rounded-full cursor-pointer bg-[#4C7CFD] hover:bg-[#0044FC] flex justify-center items-center">
             <img
               src={SendIcon}
