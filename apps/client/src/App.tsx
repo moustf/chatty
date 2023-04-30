@@ -9,6 +9,7 @@ import { LoginPage } from './pages/Login';
 import { MainPage } from './pages/Main';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { selectUerData, setUserData } from './features/auth/authSlice';
+import { ChatWindow } from './components/main-page/ChatWindow';
 import "./App.css";
 
 function App() {
@@ -54,6 +55,12 @@ function App() {
     {
       path: '/main',
       element: <MainPage />,
+      children: [
+        {
+          path: 'chat/:chatId',
+          element: <ChatWindow />
+        },
+      ],
     },
   ]);
 

@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { MainHeader } from '../components/main-page/MainHeader';
-import { UserConversationList } from '../components/main-page/UserConversationsList';
+import { ChatOverallComponent } from '../components/main-page/ChatOverallComponent';
 
 export const MainPage: FC = () => {
   return (
     <div className="w-full h-screen flex flex-col justify-betwee">
       <MainHeader />
-      <UserConversationList />
+      <ChatOverallComponent />
     </div>
   );
 };

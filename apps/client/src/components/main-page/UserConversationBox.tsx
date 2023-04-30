@@ -1,25 +1,46 @@
-import { FC } from 'react';
+import { FC, Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserConversation } from '@chatty/types';
 
 import { ConversationsImage } from './ConversationsImage';
 import { formatTime } from '../../utils/formatTime';
+import { useAppDispatch } from '../../hooks/redux';
+import { setIsChatListShownToFalse } from '../../features/chat/chatSlice';
 
-export const UserConversationBox: FC<{
-  id: string;
-  name: string;
-  message: string;
-  type: 'individual' | 'group';
-  createdAt: string;
-  usersNumber: number;
-}> = ({ id, name, message, type, createdAt, usersNumber }) => (
-  <div id={id} className="w-full py-8 px-4 flex flex-col gap-12 hover:bg-grey-200 cursor-pointer">
+export const UserConversationBox: FC<UserConversation> = ({ id, name, message, type, createdAt, usersNumber }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  return (
+    <div
+      id={id}
+      className="w-full py-8 px-4 flex flex-col gap-12 hover:bg-grey-200 cursor-pointer"
+      onClick={() => {
+        navigate(`/main/chat/${id}`);
+        dispatch(setIsChatListShownToFalse());
+      }}
+    >
     <div className="w-full flex justify-between items-center">
-      <ConversationsImage name={name} type={type} usersNumber={usersNumber} />
+        <ConversationsImage
+          name={name}
+          type={type}
+          usersNumber={usersNumber}
+        />
       <div className="flex flex-col items-center gap-6">
-        <h3 className="text-bold text-h3 lg:text-h4 xl:text-h3 text-grey-800">{name}</h3>
-        <p className="text-grey-500 text-subtitle1">{message}</p>
+          <h3
+            className="text-bold text-h3 lg:text-h4 xl:text-h3 text-grey-800"
+          >
+            {name}
+          </h3>
+          <p className="text-grey-500 text-subtitle1">
+            {message}
+          </p>
       </div>
-      <p className="text-grey-800 text-h5">{formatTime(createdAt)}</p>
+        <p className="text-grey-800 text-h5">
+          {formatTime(createdAt)}
+        </p>
     </div>
     <div className="w-full h-1 rounded-lg bg-grey-300" />
   </div>
-);
+  );
+  };

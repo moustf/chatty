@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 import { UserConversationBox } from './UserConversationBox';
+import { useAppSelector } from '../../hooks/redux';
+import { selectIsChatsListShown } from '../../features/chat/chatSlice';
 
 const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
@@ -16,8 +18,12 @@ export const UserConversationList: FC = () => {
     ),
   });
 
+  const isChatsListShown = useAppSelector(selectIsChatsListShown);
+
   return (
-    <section className="w-full lg:w-1/3 xl:w-1/4 h-screen flex flex-col gap-8 px-4 py-8">
+    <section
+      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 shadow-z24 flex flex-col gap-8 px-4 py-8 ${!isChatsListShown && 'hidden'} lg:flex`}
+    >
       {
         data?.data.data.map((con: any) => {
           const name = con.name || `${con.users[0].firstName} ${con.users[0].lastName || ''}`;
@@ -26,14 +32,15 @@ export const UserConversationList: FC = () => {
 
           return (
             <UserConversationBox
-              id={con.id}
+              key={con._id}
+              id={con._id}
               type={con.users.length > 1 ? 'group' : 'individual'}
               name={name}
               message={message}
               createdAt={lastUpdate}
               usersNumber={con.users.length}
             />
-          )
+          );
         })
       }
     </section>

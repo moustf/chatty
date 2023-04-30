@@ -39,14 +39,6 @@ describe('Testing the check user password route.', () => {
   });
 
   test('In the failure case, the route should return 401 status code and the unauthorized message when the user is not logged in', async () => {
-    // await request(app).post('/api/v1/auth/provider').send({
-    //   firstName: 'Mustafa',
-    //   lastName: 'Salem',
-    //   email: 'tepro.18@gmail.com',
-    //   provider: 'google.com',
-    //   token:
-    //     'ya29.a0AVvZVsp8JBrACJirMYq6DeYdbkS9Y8R1r-ProXuPY1uu-o3a405DkEc0oK8Gh8j8IDfHXq0DOZJeMGExx0rJM2gXHcSpurgI-TtrPi9Q_ncDYg2MTW3V2MGitl71Bp4x21lpWMN3PHsOrVKV0zH83Jc8g2k0aCgYKASESARESFQGbdwaIpBBR_h4l8W5psISzAUP7vw0163',
-    // });
     const mustafaToken = await getUserTokenWithSocialAuth(
       'Mustafa',
       'Salem',

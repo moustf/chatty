@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { InputFieldInterface } from '@chatty/types';
-import { Controller } from 'react-hook-form';
+import { Controller, Control } from 'react-hook-form';
 
-export const InputField: FC<InputFieldInterface> = ({
+export const InputField: FC<InputFieldInterface & { control: Control<any>; }> = ({
   control,
   fieldName,
   placeholder,
