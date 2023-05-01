@@ -2,8 +2,8 @@ import { FC, useState, useEffect, useRef } from 'react';
 import { Socket } from 'socket.io-client';
 
 import { useConnect } from '../../hooks/useConnect';
-import { useAppSelector } from '../../hooks/redux';
-import { selectUerData } from '../../features/auth/authSlice';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { selectUerData, setUserData } from '../../features/auth/authSlice';
 
 import AttachIcon from '../../assets/attach.svg';
 import SendIcon from '../../assets/send.svg';
@@ -16,7 +16,14 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
   const [files, setFiles] = useState<FileList>();
 
   const { socket, isConnected } = useConnect();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setUserData());
+  }, []);
+
   const { id } = useAppSelector(selectUerData); // ? Current user id.
+
 
   // ? The function for emitting new messages, accepts single file or message object.
   const emitNewMessage = (
