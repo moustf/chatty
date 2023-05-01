@@ -20,8 +20,11 @@ export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
       socket.on('newMessage', (data) => {
         // ? Receive the data from the new message, then call the add new message service function.
         const { type, text, fileName, fileData } = JSON.parse(data);
+
+        const conversationId = chatId.split(':')[1];
+
         addNewMessageService(
-          chatId,
+          conversationId,
           userId,
           type,
           text,

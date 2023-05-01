@@ -146,4 +146,7 @@ export const getConversationQuery = (id: string, userId: string) =>
   ]);
 
 export const addNewMessageQuery = (id: string, data: MessageData) =>
-  Conversation.updateOne({ _id: id }, { $push: { messages: data } });
+  Conversation.updateOne(
+    { _id: new mongoose.Types.ObjectId(id) },
+    { $push: { messages: data } }
+  );

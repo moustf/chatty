@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { writeFile, readFile } from 'fs';
+import { writeFile, readFile, unlink } from 'fs';
 import { join } from 'path';
 import { promisify } from 'util';
 
@@ -14,6 +14,7 @@ const { uploadObject } = require('../../bucket');
 // * Making the methods return promise instead of accepting a callback.
 const asyncWriteFile = promisify(writeFile);
 const asyncReadFile = promisify(readFile);
+const asyncUnlike = promisify(unlink);
 
 export const addNewMessageService = async (
   chatId: string,
@@ -57,6 +58,8 @@ export const addNewMessageService = async (
         image: fileUrl,
         sender: userId,
       });
+
+      await asyncUnlike(join(__dirname, '..', 'assets', fileName));
     } else {
       // ? Or pass it as a text message.
       await addNewMessageQuery(chatId, {
@@ -69,6 +72,7 @@ export const addNewMessageService = async (
     // ? Can change, we emit an event for the front end to receive the data.
     socket.emit('newMessageReturn', JSON.stringify(data));
   } catch (error) {
+    console.log(error);
     socket.emit('newMessageError', JSON.stringify(error));
   }
 };
