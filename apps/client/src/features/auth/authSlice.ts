@@ -27,7 +27,7 @@ export const selectUerData = createSelector(
   // * First, we pass one or more "input selector" functions.
   (state: Payload) => state.auth.userData,
   // * Then we return output, we can do any logic with it.
-  (userData: { email: string }) => userData,
+  (userData: { id: string, email: string, iat: number }) => userData,
 );
 
 export const selectError = createSelector(
