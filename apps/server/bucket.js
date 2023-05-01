@@ -1,8 +1,7 @@
-const { join } = require('path');
-
+/* eslint-disable no-console */
 const { PutObjectCommand, S3Client } = require('@aws-sdk/client-s3');
 
-process.chdir(join(process.cwd(), 'apps', 'server'));
+// process.chdir(join(process.cwd(), 'apps', 'server'));
 require('dotenv').config();
 
 // ? The s3Client function validates your request adn directs it to your Space's specified endpoint using the AWS SDK.
@@ -40,8 +39,5 @@ const uploadObject = async (fileName, fileData) => {
     console.log(error);
   }
 };
-
-// uploadObject('hi-all.txt', 'Hi All, This Is Mustafa Salem!');
-// uploadObject('marhaba-all.txt', 'Marhaba All, This Is Mustafa Salem!');
 
 module.exports = { uploadObject };
