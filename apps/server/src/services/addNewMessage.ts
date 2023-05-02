@@ -7,7 +7,7 @@ import { Socket } from 'socket.io';
 
 import { validateMessageData } from '@chatty/types';
 
-import { addNewMessageQuery } from '../queries/conversations';
+import { addNewMessageQuery, findChatById } from '../queries/conversations';
 
 const { uploadObject } = require('../../bucket');
 
@@ -58,6 +58,10 @@ export const addNewMessageService = async (
         image: fileUrl,
         sender: userId,
       });
+
+      const finedChat = await findChatById(chatId);
+
+      console.log(finedChat);
 
       await asyncUnlike(join(__dirname, '..', 'assets', fileName));
     } else {

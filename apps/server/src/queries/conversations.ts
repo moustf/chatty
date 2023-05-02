@@ -150,3 +150,6 @@ export const addNewMessageQuery = (id: string, data: MessageData) =>
     { _id: new mongoose.Types.ObjectId(id) },
     { $push: { messages: data } }
   );
+
+export const findChatById = (id: string) =>
+  Conversation.findById(new mongoose.Types.ObjectId(id));
