@@ -59,10 +59,6 @@ export const addNewMessageService = async (
         sender: userId,
       });
 
-      const finedChat = await findChatById(chatId);
-
-      console.log(finedChat);
-
       await asyncUnlike(join(__dirname, '..', 'assets', fileName));
     } else {
       // ? Or pass it as a text message.
@@ -72,6 +68,9 @@ export const addNewMessageService = async (
         sender: userId,
       });
     }
+
+    const finedChat = await findChatById(chatId);
+    console.log(finedChat);
 
     // ? Can change, we emit an event for the front end to receive the data.
     socket.emit('newMessageReturn', JSON.stringify(data));

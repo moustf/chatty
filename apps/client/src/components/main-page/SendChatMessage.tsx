@@ -46,7 +46,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
         // ? Emit new message with the image type.
         socket.emit('newMessage', JSON.stringify({
           type,
-          text: message,
           fileName,
           fileData: base64String,
         }));
@@ -55,8 +54,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
         socket.emit('newMessage', JSON.stringify({
           type,
           text: message,
-          fileName,
-          fileData,
         }));
       }
     };
