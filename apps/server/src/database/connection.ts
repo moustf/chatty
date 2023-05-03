@@ -9,6 +9,8 @@ let connectionString: string | undefined = '';
 switch (nodeEnv) {
   case 'production':
     connectionString = prodURI;
+    console.log(prodURI, 'Production database environment variable uri!');
+    console.log(connectionString, 'Production connection string!');
     break;
   case 'development':
     connectionString = devURI;
