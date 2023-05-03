@@ -33,7 +33,7 @@ export const ChatWindow: FC = () => {
         name={name}
         usersNumber={chatData?.users.length}
       />
-      <SendChatMessage />
+      <SendChatMessage chatId={chatId as string} />
     </section>
   );
 };

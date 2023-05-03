@@ -4,3 +4,4 @@ export * from './LoginData';
 export * from './messages';
 export * from './User';
 export * from './Users';
+export * from './MessageData';

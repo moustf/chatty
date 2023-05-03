@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+import { MessageData } from '@chatty/types';
+
 import { Conversation } from '../models/conversations';
 
 // ? 1 - $match: the match stage will filter the documents according the users array and the id provided
@@ -142,3 +144,12 @@ export const getConversationQuery = (id: string, userId: string) =>
       },
     },
   ]);
+
+export const addNewMessageQuery = (id: string, data: MessageData) =>
+  Conversation.updateOne(
+    { _id: new mongoose.Types.ObjectId(id) },
+    { $push: { messages: data } }
+  );
+
+export const findChatById = (id: string) =>
+  Conversation.findById(new mongoose.Types.ObjectId(id));

@@ -1,8 +1,11 @@
-import { FC, useRef, ChangeEvent, useState, DragEventHandler } from "react";
+import { FC, useRef, ChangeEvent, DragEventHandler, Dispatch, SetStateAction } from "react";
 
-export const AttachFile: FC<{ isAttachMessageShow: boolean }> = ({ isAttachMessageShow }) => {
+export const AttachFile: FC<{
+  isAttachMessageShow: boolean,
+  setFiles: Dispatch<SetStateAction<FileList | undefined>>,
+  files: FileList | undefined,
+}> = ({ isAttachMessageShow, setFiles, files }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [files, setFiles] = useState<FileList>();
 
 
   const onFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +27,7 @@ export const AttachFile: FC<{ isAttachMessageShow: boolean }> = ({ isAttachMessa
     e.preventDefault();
 
     const dt = e.dataTransfer;
+    setFiles(dt.files);
   };
 
   return (
