@@ -24,7 +24,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
 
   const { id } = useAppSelector(selectUerData); // ? Current user id.
 
-
   // ? The function for emitting new messages, accepts single file or message object.
   const emitNewMessage = (
     type: string,
@@ -49,6 +48,9 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
           fileName,
           fileData: base64String,
         }));
+
+        // TODO: Listen to new single message event and add the data to the
+        // TODO: to the new messages array.
       } else if (type === 'text') {
         // ? Emit new message with the text type.
         socket.emit('newMessage', JSON.stringify({
@@ -56,6 +58,10 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
           text: message,
         }));
       }
+
+      socket.on('newMessageReturn', (data: any) => {
+        console.log(JSON.parse(data));
+      });
     };
   }
 
