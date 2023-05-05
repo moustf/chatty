@@ -23,15 +23,15 @@ export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
 
         const conversationId = chatId.split(':')[1];
 
-        addNewMessageService(
-          conversationId,
+        addNewMessageService({
+          chatId: conversationId,
           userId,
           type,
           text,
           fileName,
           fileData,
-          socket
-        );
+          socket,
+        });
       });
     });
   });
