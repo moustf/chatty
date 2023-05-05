@@ -43,16 +43,6 @@ export const getUserConversationQuery = (id: string) =>
       },
     },
     {
-      $unwind: '$users',
-    },
-    {
-      $match: {
-        'users._id': {
-          $ne: new mongoose.Types.ObjectId(id),
-        },
-      },
-    },
-    {
       $project: {
         _id: 1,
         name: 1,
@@ -153,3 +143,55 @@ export const addNewMessageQuery = (id: string, data: MessageData) =>
 
 export const findChatById = (id: string) =>
   Conversation.findById(new mongoose.Types.ObjectId(id));
+
+export const getLatestMessage = (chatId: string) =>
+  Conversation.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(chatId),
+      },
+    },
+    {
+      $project: {
+        messages: 1,
+        created_at: 1,
+        updated_at: 1,
+      },
+    },
+    {
+      $lookup: {
+        from: 'users',
+        let: { sender: '$sender' },
+        pipeline: [
+          {
+            $match: {
+              $expr: {
+                $in: ['$users._id', '$$sender'],
+              },
+            },
+          },
+        ],
+        as: 'sender',
+      },
+    },
+    {
+      $sort: {
+        'messages.createdAt': -1,
+      },
+    },
+    {
+      $project: {
+        messages: {
+          $slice: ['$messages', -1],
+        },
+        created_at: 1,
+        updated_at: 1,
+      },
+    },
+    {
+      $group: {
+        _id: '$_id',
+        messages: { $first: '$messages' },
+      },
+    },
+  ]);
