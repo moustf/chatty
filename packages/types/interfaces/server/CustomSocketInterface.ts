@@ -8,4 +8,5 @@ export type SocketEventsMap = {
   pong: () => void;
   connection: (socket: Socket) => void;
   newMessage: (data: string) => void;
+  newMessageReturn: (data: any) => void;
 };

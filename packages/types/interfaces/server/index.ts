@@ -5,3 +5,5 @@ export * from './messages';
 export * from './User';
 export * from './Users';
 export * from './MessageData';
+export * from './AddMessageParameters';
+export * from './GetMessagesParameter';
