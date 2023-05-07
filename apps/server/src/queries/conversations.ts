@@ -209,6 +209,7 @@ export const getAllMessagesQuery = (
     },
     {
       $project: {
+        _id: 1,
         messages: 1,
       },
     },
@@ -239,7 +240,6 @@ export const getAllMessagesQuery = (
     },
     {
       $project: {
-        id: '$messages._id',
         user: '$senders._id',
         type: '$messages.type',
         text: '$messages.text',
