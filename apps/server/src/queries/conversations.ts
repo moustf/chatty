@@ -195,3 +195,59 @@ export const getLatestMessage = (chatId: string) =>
       },
     },
   ]);
+
+export const getAllMessagesQuery = (
+  chatId: string,
+  limit: number,
+  offset: number
+) =>
+  Conversation.aggregate([
+    {
+      $match: {
+        _id: new mongoose.Types.ObjectId(chatId),
+      },
+    },
+    {
+      $project: {
+        messages: 1,
+      },
+    },
+    {
+      $unwind: '$messages',
+    },
+    {
+      $sort: {
+        createdAt: -1,
+      },
+    },
+    {
+      $skip: offset,
+    },
+    {
+      $limit: limit,
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'messages.sender',
+        foreignField: '_id',
+        as: 'senders',
+      },
+    },
+    {
+      $unwind: '$senders',
+    },
+    {
+      $project: {
+        id: '$messages._id',
+        user: '$senders._id',
+        type: '$messages.type',
+        text: '$messages.text',
+        name: {
+          $concat: ['$senders.firstName', ' ', '$senders.lastName'],
+        },
+        createdAt: '$messages.createdAt',
+        updatedAt: '$messages.updatedAt',
+      },
+    },
+  ]);
