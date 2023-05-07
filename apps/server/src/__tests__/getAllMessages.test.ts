@@ -11,7 +11,9 @@ describe('Testing the route for getting all the messages for a specific conversa
     );
 
     const res = await request(app)
-      .get('/api/v1/conversations/messages?chatId=6411eca56e9d4cac192a49bd')
+      .get(
+        '/api/v1/conversations/messages?chatId=6411eca56e9d4cac192a49bd&limit=1&offset=1'
+      )
       .set('Cookie', [`token=${mustafaToken}`])
       .expect(200);
 
@@ -42,7 +44,9 @@ describe('Testing the route for getting all the messages for a specific conversa
     );
 
     const res = await request(app)
-      .get('/api/v1/conversations/messages?chatId=644a96c1b8e83c77310a4247')
+      .get(
+        '/api/v1/conversations/messages?chatId=644a96c1b8e83c77310a4247&limit=1&offset=1'
+      )
       .set('Cookie', [`token=${mustafaToken}`])
       .expect(204);
 

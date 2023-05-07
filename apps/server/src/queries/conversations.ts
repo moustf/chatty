@@ -196,7 +196,11 @@ export const getLatestMessage = (chatId: string) =>
     },
   ]);
 
-export const getAllMessagesQuery = (chatId: string) =>
+export const getAllMessagesQuery = (
+  chatId: string,
+  limit: number,
+  offset: number
+) =>
   Conversation.aggregate([
     {
       $match: {
@@ -212,6 +216,17 @@ export const getAllMessagesQuery = (chatId: string) =>
       $unwind: '$messages',
     },
     {
+      $sort: {
+        createdAt: -1,
+      },
+    },
+    {
+      $skip: offset,
+    },
+    {
+      $limit: limit,
+    },
+    {
       $lookup: {
         from: 'users',
         localField: 'messages.sender',
@@ -224,14 +239,15 @@ export const getAllMessagesQuery = (chatId: string) =>
     },
     {
       $project: {
-        msgId: '$messages._id',
-        userId: '$senders._id',
-        msgType: '$messages.type',
-        msgText: '$messages.text',
+        id: '$messages._id',
+        user: '$senders._id',
+        type: '$messages.type',
+        text: '$messages.text',
+        name: {
+          $concat: ['$senders.firstName', ' ', '$senders.lastName'],
+        },
         createdAt: '$messages.createdAt',
         updatedAt: '$messages.updatedAt',
-        firstName: '$senders.firstName',
-        lastName: '$senders.lastName',
       },
     },
   ]);
