@@ -1,24 +1,13 @@
 import { Payload } from '@chatty/types';
-import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createSelector, createAction } from '@reduxjs/toolkit';
 
 const initialState = {
   isChatsListShown: false,
 };
 
-const setIsChatsListShownToFalseThunk = () => new Promise((res) => res(false));
-const setIsChatsListShownToTrueThunk = () => new Promise((res) => res(true));
+export const setChatsListShownToFalseAction = createAction<boolean>('chat/setIsChatListShowToFalse');
+export const setChatsListShownToTrueAction = createAction<boolean>('chat/setIsChatListShowToTrue');
 
-export const setIsChatListShownToFalse = createAsyncThunk(
-  'chat/setIsChatListShowToFalse',
-  setIsChatsListShownToFalseThunk,
-);
-export const setIsChatListShownToTrue = createAsyncThunk(
-  'chat/setIsChatListShowToTrue',
-  setIsChatsListShownToTrueThunk,
-);
-
-export const createSetIsChatsListShownToFalseAction = (payload: Payload): { isChatsListShown: boolean } => ({ isChatsListShown: false });
-export const createSetIsChatsListShownToTrueAction = (payload: Payload): { isChatsListShown: boolean } => ({ isChatsListShown: true });
 
 export const selectIsChatsListShown = createSelector(
   (state: Payload) => state.chat,
@@ -30,12 +19,12 @@ const chatSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(setIsChatListShownToFalse.fulfilled, (state, action) => {
-      state.isChatsListShown = action.payload as boolean;
+    builder.addCase(setChatsListShownToFalseAction, (state, action) => {
+      state.isChatsListShown = action.payload;
     });
 
-    builder.addCase(setIsChatListShownToTrue.fulfilled, (state, action) => {
-      state.isChatsListShown = action.payload as boolean;
+    builder.addCase(setChatsListShownToTrueAction, (state, action) => {
+      state.isChatsListShown = action.payload;
     });
   },
 });
