@@ -1,4 +1,4 @@
-import { CustomMessagesHashTable } from '../../custom_data_types/CustomHashMap';
+import { CustomMessagesHashTableTypes } from '../index';
 
 export type Payload = {
   auth: {
@@ -7,5 +7,5 @@ export type Payload = {
     error: string;
   };
   chat: { isChatsListShown: boolean };
-  messages: typeof CustomMessagesHashTable;
+  message: CustomMessagesHashTableTypes;
 };

@@ -1,6 +1,6 @@
-import { MessageObject } from '../interfaces/';
+import { MessageObject, CustomMessagesHashTableTypes } from '../interfaces/';
 
-export class CustomMessagesHashTable {
+export class CustomMessagesHashTable implements CustomMessagesHashTableTypes {
   private messages: { [key: string]: MessageObject[] };
 
   constructor() {
