@@ -4,7 +4,7 @@ import { GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, signInWi
 
 import { auth } from '../firebaseSetup';
 
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+const baseUrl = import.meta.env.BASE_URL;
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();

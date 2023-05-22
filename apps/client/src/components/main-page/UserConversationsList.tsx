@@ -6,7 +6,7 @@ import { UserConversationBox } from './UserConversationBox';
 import { useAppSelector } from '../../hooks/redux';
 import { selectIsChatsListShown } from '../../features/chat/chatSlice';
 
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+const baseUrl = import.meta.env.BASE_URL;
 
 export const UserConversationList: FC = () => {
   const { data } = useQuery({

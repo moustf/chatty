@@ -13,7 +13,8 @@
     "start": {
       "dependsOn": [
         "build"
-      ]
+      ],
+      "cache": false
     },
     "lint": {},
     "lint:fix": {},

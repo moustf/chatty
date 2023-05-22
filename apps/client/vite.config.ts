@@ -8,7 +8,7 @@ export default ({ mode }) => {
   return defineConfig({
     plugins: [react()],
     base: process.env.NODE_ENV === 'production'
-      ? 'http://134.122.73.111:8080'
-      : "http://localhost:8080",
+      ? process.env.PROD_BASE_URL
+      : process.env.BASE_URL,
   });
 }

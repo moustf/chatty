@@ -76,7 +76,6 @@ export const addNewMessageService = async (
     }
 
     const latestChat = await getLatestMessage(chatId);
-    console.log(latestChat, 'Latest message after ');
 
     // ? Can change, we emit an event for the front end to receive the data.
     socket.emit('newMessageReturn', JSON.stringify(latestChat));

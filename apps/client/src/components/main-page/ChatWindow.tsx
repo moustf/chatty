@@ -8,7 +8,7 @@ import axios from 'axios';
 import { ChatWindowHeading } from './chatWindowHeading';
 import { SendChatMessage } from './SendChatMessage';
 
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+const baseUrl = import.meta.env.BASE_URL;
 
 export const ChatWindow: FC = () => {
   const { chatId } = useParams();

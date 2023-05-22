@@ -60,7 +60,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
       }
 
       socket.on('newMessageReturn', (data: any) => {
-        console.log(JSON.parse(data));
       });
     };
   }

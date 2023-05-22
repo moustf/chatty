@@ -12,7 +12,7 @@ import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
 import { OrSeparator } from '../components/OrSeparator';
 import { InputField } from '../components/InputField';
 
-const baseUrl = import.meta.env.VITE_APP_BASE_URL
+const baseUrl = import.meta.env.BASE_URL
 
 export const SignupPage: FC = () => {
   axios.defaults.withCredentials = true;

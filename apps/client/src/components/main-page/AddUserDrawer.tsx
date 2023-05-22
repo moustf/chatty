@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useDebouncedValue } from '../../hooks/useDebouncedValue';
 import { UserBox } from './UserBox';
 
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+const baseUrl = import.meta.env.BASE_URL;
 
 export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
   axios.defaults.withCredentials = true;

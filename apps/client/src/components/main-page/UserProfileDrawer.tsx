@@ -6,7 +6,7 @@ import EmailIcon from '../../assets/EmailIcon.svg';
 import CalendarIcon from '../../assets/Calendar.svg';
 import { UpdatePasswordForm } from './UpdatePasswordForm';
 
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+const baseUrl = import.meta.env.BASE_URL;
 
 export const UserProfileDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
   axios.defaults.withCredentials = true;
