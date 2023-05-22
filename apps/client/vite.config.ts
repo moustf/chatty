@@ -7,8 +7,8 @@ export default ({ mode }) => {
 
   return defineConfig({
     plugins: [react()],
-    base: process.env.NODE_ENV === 'production'
-      ? process.env.PROD_BASE_URL
-      : process.env.BASE_URL,
+    base: mode === 'development'
+      ? process.env.VITE_APP_BASE_URL
+      : process.env.VITE_APP_PROD_BASE_URL
   });
 }

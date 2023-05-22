@@ -3,8 +3,7 @@ import axios from 'axios';
 import { GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import { auth } from '../firebaseSetup';
-
-const baseUrl = import.meta.env.BASE_URL;
+import { baseUrl } from '../config/environment';
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();

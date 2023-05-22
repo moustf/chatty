@@ -5,8 +5,7 @@ import axios from 'axios';
 import EmailIcon from '../../assets/EmailIcon.svg';
 import CalendarIcon from '../../assets/Calendar.svg';
 import { UpdatePasswordForm } from './UpdatePasswordForm';
-
-const baseUrl = import.meta.env.BASE_URL;
+import { baseUrl } from '../../config/environment';
 
 export const UserProfileDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
   axios.defaults.withCredentials = true;

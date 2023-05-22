@@ -2,7 +2,7 @@ import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit'
 import { Payload } from '@chatty/types';
 import axios from 'axios';
 
-const baseUrl = import.meta.env.BASE_URL;
+import { baseUrl } from '../../config/environment';
 
 const initialState = {
   userData: { id: '', email: '', iat: 0 },

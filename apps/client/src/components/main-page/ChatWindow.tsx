@@ -7,8 +7,7 @@ import axios from 'axios';
 
 import { ChatWindowHeading } from './chatWindowHeading';
 import { SendChatMessage } from './SendChatMessage';
-
-const baseUrl = import.meta.env.BASE_URL;
+import { baseUrl } from '../../config/environment';
 
 export const ChatWindow: FC = () => {
   const { chatId } = useParams();

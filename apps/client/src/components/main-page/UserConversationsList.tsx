@@ -5,8 +5,7 @@ import axios from 'axios';
 import { UserConversationBox } from './UserConversationBox';
 import { useAppSelector } from '../../hooks/redux';
 import { selectIsChatsListShown } from '../../features/chat/chatSlice';
-
-const baseUrl = import.meta.env.BASE_URL;
+import { baseUrl } from '../../config/environment';
 
 export const UserConversationList: FC = () => {
   const { data } = useQuery({

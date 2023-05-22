@@ -10,8 +10,7 @@ import { SignupLoginWelcomeSection } from '../components/SignupLoginWelcomeSecti
 import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
 import { OrSeparator } from '../components/OrSeparator';
 import { InputField } from '../components/InputField';
-
-const baseUrl = import.meta.env.BASE_URL;
+import { baseUrl } from '../config/environment';
 
 export const LoginPage: FC = () => {
   axios.defaults.withCredentials = true;

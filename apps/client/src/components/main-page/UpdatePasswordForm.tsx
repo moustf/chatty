@@ -7,13 +7,14 @@ import Swal from 'sweetalert2';
 
 import { userOldNewPasswordsSchema } from '@chatty/types';
 
+import { baseUrl } from '../../config/environment';
+
 type ChangePasswords = {
   oldPassword: string;
   newPassword: string;
   confirmNewPassword: string;
 };
 
-const baseUrl = import.meta.env.BASE_URL;
 
 export const UpdatePasswordForm: FC = () => {
   const { handleSubmit, control, formState: { errors } } = useForm({
