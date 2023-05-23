@@ -146,14 +146,17 @@ const collections = [
           {
             type: 'text',
             text: 'Hello',
-            sender: '6357f708ed0c57054008e300',
+            media:
+              'https://chatty-bucket.fra1.cdn.digitaloceanspaces.com/Screenshot%20from%202023-05-21%2023-32-58.png',
+            mediaType: 'png',
+            sender: new mongoose.Types.ObjectId('6357f708ed0c57054008e300'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
             type: 'text',
             text: 'Hi there!',
-            sender: '123ea40720dcfa02e0ae42db',
+            sender: new mongoose.Types.ObjectId('123ea40720dcfa02e0ae42db'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
@@ -223,6 +226,9 @@ const collections = [
           {
             type: 'text',
             text: 'Hi all',
+            media:
+              'https://chatty-bucket.fra1.cdn.digitaloceanspaces.com/Screenshot%20from%202023-05-21%2023-32-58.png',
+            mediaType: 'png',
             sender: new mongoose.Types.ObjectId('2587f708ed0c57054008e500'),
             createdAt: new Date(),
             updatedAt: new Date(),

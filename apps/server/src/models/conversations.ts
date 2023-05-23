@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 import { Conversation as ConversationInterface } from '@chatty/types';
 
+import { mediaMimeTypes } from '../utils/helpers';
+
 const conversationsSchema = new mongoose.Schema<ConversationInterface>(
   {
     users: [
@@ -15,13 +17,21 @@ const conversationsSchema = new mongoose.Schema<ConversationInterface>(
       {
         type: {
           type: String,
-          enum: ['text', 'action', 'image'],
+          enum: ['message', 'action'],
         },
         text: {
           type: String,
         },
-        image: {
+        media: {
           type: String,
+        },
+        mediaType: {
+          type: String,
+          enum: [...Object.keys(mediaMimeTypes)],
+        },
+        action: {
+          type: String,
+          enum: ['add', 'remove', 'update'],
         },
         sender: {
           type: mongoose.Schema.Types.ObjectId,
