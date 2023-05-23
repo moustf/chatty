@@ -25,7 +25,7 @@ export const UserConversationList: FC = () => {
     >
       {
         data?.data.data.map((con: any) => {
-          const name = con.name || `${con.users[0].firstName} ${con.users[0].lastName || ''}`;
+          const name = con.name || `${con.users[0][0].firstName[0]} ${con.users[0][0].lastName || ''}`;
           const message = con.messages[0].text;
           const lastUpdate = con.messages[0].createdAt;
 

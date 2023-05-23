@@ -1,1 +1,1 @@
-export * from './statusCodes.enum';
+export * from './StatusCodes.enum';
