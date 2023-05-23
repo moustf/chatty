@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { StatusCodes } from '@chatty/types';
 
 import { getUserConversationQuery } from '../../queries/conversations';
 
@@ -16,7 +16,7 @@ export const getUserConversations = async (
 
     if (!conversations.length) {
       return res
-        .status(STATUS_CODES.NOT_FOUND)
+        .status(StatusCodes.NotFound)
         .json({ msg: 'The users has no conversations!' });
     }
 

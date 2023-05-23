@@ -1,4 +1,4 @@
-import { User, STATUS_CODES } from '@chatty/types';
+import { User, StatusCodes } from '@chatty/types';
 
 import { getUserByEmail, createUser, getUser } from '../queries/user';
 import { hashPassword } from '../utils/bcrypt';
@@ -14,7 +14,7 @@ export const registerUser = async ({
   const userByEmail = await getUserByEmail(email as string);
 
   if (userByEmail)
-    throw new GenericError(STATUS_CODES.CONFLICT, 'User already exists!');
+    throw new GenericError(StatusCodes.Conflict, 'User already exists!');
 
   const hashedPassword = await hashPassword(password as string);
 

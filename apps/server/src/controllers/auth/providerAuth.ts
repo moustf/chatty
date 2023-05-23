@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { userDataSchema, STATUS_CODES } from '@chatty/types';
+import { userDataSchema, StatusCodes } from '@chatty/types';
 
 import { User } from '../../models/users';
 import { GenericError } from '../../utils/custom/GenericError';
@@ -18,7 +18,7 @@ export const providerAuth = async (
     await User.updateOne({ email }, req.body, { upsert: true });
 
     return res
-      .status(STATUS_CODES.CREATED)
+      .status(StatusCodes.Created)
       .cookie('token', token, { httpOnly: true })
       .json({
         msg: 'The user have been created successfully!',
@@ -32,7 +32,7 @@ export const providerAuth = async (
     if (error.name === 'ValidationError') {
       return next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'The user has provided wrong data!'
         )
       );

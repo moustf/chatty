@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { StatusCodes } from '@chatty/types';
 
 import { loginUser } from '../../services/login';
 import { GenericError } from '../../utils/custom/GenericError';
@@ -23,7 +23,7 @@ export const loginController = async (
     if (error.name === 'ValidationError') {
       return next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'The user has entered worng data!'
         )
       );

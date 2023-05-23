@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { StatusCodes } from '@chatty/types';
 
 import { getUser } from '../../queries/user';
 import { GenericError } from '../../utils/custom/GenericError';
@@ -17,7 +17,7 @@ export const getUserByIdController = async (
 
     if (!user) {
       throw new GenericError(
-        STATUS_CODES.NOT_FOUND,
+        StatusCodes.NotFound,
         'The user you are searching for does not exist!'
       );
     }
@@ -27,14 +27,14 @@ export const getUserByIdController = async (
     if (error.name === 'ValidationError') {
       return next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'The user has entered wrong data!'
         )
       );
     } else if (error.name === 'CastError') {
       return next(
         new GenericError(
-          STATUS_CODES.NOT_FOUND,
+          StatusCodes.NotFound,
           'The user you are searching for does not exist!'
         )
       );

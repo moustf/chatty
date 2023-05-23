@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
 
-import { STATUS_CODES, userOldNewPasswordsSchema } from '@chatty/types';
+import { StatusCodes, userOldNewPasswordsSchema } from '@chatty/types';
 
 import { getUser } from '../../queries/user';
 import { comparePasswords, hashPassword } from '../../utils/bcrypt';
@@ -30,7 +30,7 @@ export const changeUserPassword = async (
 
     if (!isPasswordsTheSame) {
       throw new GenericError(
-        STATUS_CODES.UNAUTHORIZED,
+        StatusCodes.Unauthorized,
         'The old password is not compatible with the new password!'
       );
     }
@@ -50,7 +50,7 @@ export const changeUserPassword = async (
     if (error.name === 'ValidationError') {
       next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'Users must match the pattern requirements!'
         )
       );

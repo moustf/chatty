@@ -22,7 +22,7 @@ const uploadObject = async (fileName, fileData) => {
     Bucket: '_static',
     Key: fileName,
     Body: fileData,
-    ACL: 'private', // Access Control Lists.
+    ACL: 'public', // Access Control Lists.
     Metadata: {
       'x-amx-meta-description': 'Uploading static files.',
     },

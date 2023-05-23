@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { Types } from 'mongoose';
 
-import { STATUS_CODES, validateAllMessagesQueryStrings } from '@chatty/types';
+import { StatusCodes, validateAllMessagesQueryStrings } from '@chatty/types';
 
 import { getAllMessagesQuery } from '../../queries/conversations';
 import { GenericError } from '../../utils/custom/GenericError';
@@ -18,7 +18,7 @@ export const getAllMessages = async (
 
     if (!chatId || !isChatIdValid) {
       throw new GenericError(
-        STATUS_CODES.WRONG_DATA,
+        StatusCodes.WrongData,
         "The user didn't provide a chat id or provided an invalid chat id."
       );
     }
@@ -33,7 +33,7 @@ export const getAllMessages = async (
 
     if (!messages.length) {
       throw new GenericError(
-        STATUS_CODES.NO_CONTENT,
+        StatusCodes.NoContent,
         'No messages for this conversation.'
       );
     }
@@ -46,7 +46,7 @@ export const getAllMessages = async (
     if (error.name === 'ValidationError') {
       return next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'The user has entered a wrong data!'
         )
       );
