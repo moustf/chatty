@@ -1,20 +1,24 @@
 import { Response, NextFunction } from 'express';
 import { Types } from 'mongoose';
 
-import { StatusCodes, validateAllMessagesQueryStrings } from '@chatty/types';
+import {
+  CustomRequest,
+  StatusCodes,
+  validateAllMessagesQueryStrings,
+} from '@chatty/types';
 
 import { getAllMessagesQuery } from '../../queries/conversations';
 import { GenericError } from '../../utils/custom/GenericError';
 
 export const getAllMessages = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { chatId, limit, offset } = req.query;
 
-    const isChatIdValid = Types.ObjectId.isValid(chatId);
+    const isChatIdValid = Types.ObjectId.isValid(chatId as string);
 
     if (!chatId || !isChatIdValid) {
       throw new GenericError(
@@ -26,7 +30,7 @@ export const getAllMessages = async (
     await validateAllMessagesQueryStrings.validate({ limit, offset });
 
     const messages = await getAllMessagesQuery(
-      chatId,
+      chatId as string,
       Number(limit),
       Number(offset)
     );

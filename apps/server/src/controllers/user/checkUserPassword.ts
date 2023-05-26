@@ -1,17 +1,17 @@
 import { Response, NextFunction } from 'express';
 
-import { StatusCodes } from '@chatty/types';
+import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getUser } from '../../queries/user';
 import { GenericError } from '../../utils/custom/GenericError';
 
 export const checkUserPassword = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { id } = req.user;
+    const { id } = req.user as { id: string; email: string };
 
     if (!id) {
       throw new GenericError(StatusCodes.Unauthorized, 'Unauthorized!');

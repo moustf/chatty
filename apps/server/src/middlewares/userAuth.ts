@@ -1,13 +1,13 @@
 import { Response, NextFunction } from 'express';
 
-import { StatusCodes } from '@chatty/types';
+import { StatusCodes, CustomRequest } from '@chatty/types';
 
 import { getUser } from '../queries/user';
 import { GenericError } from '../utils/custom/GenericError';
 import { verifyToken } from '../utils/jwt';
 
 export const userDataAuth = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -21,7 +21,7 @@ export const userDataAuth = async (
     const user = await getUser({ token });
 
     if (user?.email) {
-      req.user = { id: user._id, email: user.email };
+      req.user = { id: user._id.toString(), email: user.email };
       next();
     }
 

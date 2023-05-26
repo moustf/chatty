@@ -1,16 +1,16 @@
 import { Response, NextFunction } from 'express';
 
-import { StatusCodes } from '@chatty/types';
+import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getUserConversationQuery } from '../../queries/conversations';
 
 export const getUserConversations = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { id } = req.user;
+    const { id } = req.user as { id: string; email: string };
 
     const conversations = await getUserConversationQuery(id);
 

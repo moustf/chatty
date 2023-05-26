@@ -10,6 +10,8 @@ const {
   PRODUCTION_DB_URI,
   DEVELOPMENT_DB_URI,
   TEST_DB_URI,
+  SPACES_KEY,
+  SPACES_SECRET,
 } = process.env;
 
 export const config = {
@@ -20,4 +22,6 @@ export const config = {
   prodURI: PRODUCTION_DB_URI,
   devURI: DEVELOPMENT_DB_URI,
   testURI: TEST_DB_URI,
+  doKey: SPACES_KEY,
+  doSecret: SPACES_SECRET,
 };

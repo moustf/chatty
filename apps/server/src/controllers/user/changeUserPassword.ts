@@ -1,18 +1,22 @@
 import { Response, NextFunction } from 'express';
 
-import { StatusCodes, userOldNewPasswordsSchema } from '@chatty/types';
+import {
+  CustomRequest,
+  StatusCodes,
+  userOldNewPasswordsSchema,
+} from '@chatty/types';
 
 import { getUser } from '../../queries/user';
 import { comparePasswords, hashPassword } from '../../utils/bcrypt';
 import { GenericError } from '../../utils/custom/GenericError';
 
 export const changeUserPassword = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { id } = req.user;
+    const { id } = req.user as { id: string; email: string };
     const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
     await userOldNewPasswordsSchema.validate({

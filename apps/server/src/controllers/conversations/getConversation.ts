@@ -1,18 +1,18 @@
 import { Response, NextFunction } from 'express';
 
-import { StatusCodes } from '@chatty/types';
+import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getConversationQuery } from '../../queries/conversations';
 import { GenericError } from '../../utils/custom/GenericError';
 
 export const getConversation = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { chatId } = req.query;
-    const { id } = req.user;
+    const { id } = req.user as { id: string; email: string };
 
     if (!chatId) {
       throw new GenericError(
@@ -21,7 +21,7 @@ export const getConversation = async (
       );
     }
 
-    const conversationData = await getConversationQuery(chatId, id);
+    const conversationData = await getConversationQuery(chatId as string, id);
 
     if (!conversationData.length) {
       throw new GenericError(

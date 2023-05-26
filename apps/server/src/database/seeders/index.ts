@@ -224,7 +224,7 @@ const collections = [
         ],
         messages: [
           {
-            type: 'text',
+            type: 'message',
             text: 'Hi all',
             media:
               'https://chatty-bucket.fra1.cdn.digitaloceanspaces.com/Screenshot%20from%202023-05-21%2023-32-58.png',
@@ -234,14 +234,14 @@ const collections = [
             updatedAt: new Date(),
           },
           {
-            type: 'text',
+            type: 'message',
             text: 'Hello there!',
             sender: new mongoose.Types.ObjectId('6411bd4547dc76574443c75a'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
-            type: 'image',
+            type: 'message',
             image:
               'https://images.pexels.com/photos/8289647/pexels-photo-8289647.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
             sender: '6411bd24231678cfdf841048',
@@ -250,7 +250,7 @@ const collections = [
           },
           {
             type: 'action',
-            text: 'added',
+            action: 'add',
             sender: new mongoose.Types.ObjectId('147ea40720dcfa02e0ae42db'),
             createdAt: new Date(),
             updatedAt: new Date(),
