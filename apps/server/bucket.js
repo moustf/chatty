@@ -6,7 +6,7 @@ require('dotenv').config();
 
 // ? The s3Client function validates your request adn directs it to your Space's specified endpoint using the AWS SDK.
 const s3Client = new S3Client({
-  endpoint: 'https://chatty-bucket.fra1.digitaloceanspaces.com',
+  endpoint: 'https://fra1.digitaloceanspaces.com',
   forcePathStyle: false,
   region: 'fra1',
   credentials: {
