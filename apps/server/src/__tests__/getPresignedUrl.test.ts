@@ -16,6 +16,7 @@ describe('Testing the route of creating a presigned url to upload media to space
       .expect(201);
 
     console.log(typeof res.body.data.url, 'Presigned URL data type!!');
+    console.log(res.body.data.url, 'Presigned URL data data!!');
 
     expect(typeof res.body.data.url).toBe('string');
     expect(res.body.data.url.startsWith('https://')).toBe(true);
