@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { userDataSchema, StatusCodes } from '@chatty/types';
+import { userDataRouteSchema, StatusCodes } from '@chatty/types';
 
 import { User } from '../../models/users';
 import { GenericError } from '../../utils/custom/GenericError';
@@ -13,7 +13,7 @@ export const providerAuth = async (
   try {
     const { firstName, lastName, email, token } = req.body;
 
-    await userDataSchema.validate(req.body);
+    await userDataRouteSchema.validate(req.body);
 
     await User.updateOne({ email }, req.body, { upsert: true });
 
