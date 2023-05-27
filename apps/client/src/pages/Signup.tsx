@@ -1,66 +1,32 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, SubmitHandler, FieldValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { User } from '@chatty/types';
 import { userDataComponentSchema } from '@chatty/types';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 import { SignupLoginWelcomeSection } from '../components/SignupLoginWelcomeSection';
 import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
 import { OrSeparator } from '../components/OrSeparator';
 import { InputField } from '../components/InputField';
-import { baseUrl } from '../config/environment';
-import { useNavigate } from 'react-router-dom';
+import { apiClient, errorSwalMessage, successSwalMessage } from '../utils';
+import { useErrorMessage } from '../hooks';
 
 export const SignupPage: FC = () => {
-  axios.defaults.withCredentials = true;
-
   const [step, setStep] = useState<number>(1);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const { errorMessage, setError } = useErrorMessage();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const resetErrorMessage = () => setErrorMessage('');
-
-    const inputFields = document.querySelectorAll('input');
-    inputFields.forEach((input) => {
-      input.addEventListener('input', resetErrorMessage);
-    });
-
-    return () => {
-      inputFields.forEach((input) => {
-        input.removeEventListener('input', resetErrorMessage);
-      });
-    };
-  }, []);
 
   const { mutate } = useMutation({
     mutationFn: (user: User) => (
-      axios.post(`${baseUrl}/api/v1/auth/signup`, user, {
-        withCredentials: true,
-        headers: {
-          'content-type': 'application/json',
-          'Accept': 'application/json',
-        },
-      })
+      apiClient.post('/auth/signup', user)
     ),
     onError: (error: any) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error?.response.data.msg + " " + error?.response.status,
-      });
+      errorSwalMessage(error);
     },
     onSuccess: () => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'The user has account has been created successfully!',
-        showConfirmButton: false,
-        timer: 1500
-      });
+      successSwalMessage('The user has account has been created successfully!');
 
       setTimeout(() => {
         navigate('/login');
@@ -69,7 +35,7 @@ export const SignupPage: FC = () => {
   });
 
   const {
-    handleSubmit, control, reset, formState: { errors, isValid }
+    handleSubmit, control, reset, formState: { errors, dirtyFields }
   } = useForm({
     defaultValues: {
       firstName: '',
@@ -81,10 +47,12 @@ export const SignupPage: FC = () => {
     resolver: yupResolver(userDataComponentSchema),
   });
 
+  const isValid = Object.keys(dirtyFields).length === 5;
+
   const onSignupSubmit: SubmitHandler<FieldValue<any>> = handleSubmit((data: User) => mutate(data));
 
   if (Object.keys(errors).length && !errorMessage) {
-    setErrorMessage(
+    setError(
       errors.firstName
         ? 'First Name is required!'
         : errors.lastName
