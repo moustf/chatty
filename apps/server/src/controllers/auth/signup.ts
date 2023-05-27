@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { StatusCodes, userDataSchema } from '@chatty/types';
+import { StatusCodes, userDataRouteSchema } from '@chatty/types';
 
 import { registerUser } from '../../services/signup';
 import { GenericError } from '../../utils/custom/GenericError';
@@ -13,7 +13,7 @@ export const signupController = async (
   try {
     const { body } = req;
 
-    await userDataSchema.validate(body);
+    await userDataRouteSchema.validate(body);
 
     const { user, token } = await registerUser(body);
 
