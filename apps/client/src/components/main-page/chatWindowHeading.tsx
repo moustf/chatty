@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ConversationsImageHeading } from '@chatty/types';
 
 import { ConversationsImage } from './ConversationsImage';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks';
 import { setIsChatListShownToTrue } from '../../features/chat/chatSlice';
 import SeeMoreIcon from '../../assets/see-more.svg';
 import ArrowLeftIcon from '../../assets/arrow-left.svg';

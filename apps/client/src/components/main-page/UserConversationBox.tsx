@@ -4,7 +4,7 @@ import { UserConversation } from '@chatty/types';
 
 import { ConversationsImage } from './ConversationsImage';
 import { formatTime } from '../../utils/formatTime';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks';
 import { setIsChatListShownToFalse } from '../../features/chat/chatSlice';
 
 export const UserConversationBox: FC<UserConversation> = ({ id, name, message, type, createdAt, usersNumber }) => {

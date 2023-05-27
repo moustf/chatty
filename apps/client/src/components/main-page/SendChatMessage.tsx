@@ -1,7 +1,6 @@
 import { FC, useState, useEffect, useRef } from 'react';
 
-import { useConnect } from '../../hooks/useConnect';
-import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { useConnect, useAppSelector, useAppDispatch } from '../../hooks';
 import { selectUerData, setUserData } from '../../features/auth/authSlice';
 
 import AttachIcon from '../../assets/attach.svg';

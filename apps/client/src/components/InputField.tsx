@@ -20,7 +20,7 @@ export const InputField: FC<InputFieldInterface & { control: Control<any>; }> = 
       render={({ field: { onChange, onBlur, name } }) => {
         return type === 'password'
           ? (
-            <div className='flex'>
+            <div className='flex relative'>
               <input
                 className="w-full h-14 h border-solid border-grey mb-6 border rounded-lg p px-4 py-2"
                 type={inputType}
@@ -32,7 +32,7 @@ export const InputField: FC<InputFieldInterface & { control: Control<any>; }> = 
               {
                 inputType === 'password'
                   ? <img
-                    className='translate-x-[-3rem] translate-y-[-0.8rem]'
+                    className='absolute right-4 top-4'
                     src={EyeOn}
                     onClick={() => setInputType('text')}
                     alt="Eye open icon"
@@ -40,7 +40,7 @@ export const InputField: FC<InputFieldInterface & { control: Control<any>; }> = 
                     height="24"
                   />
                   : <img
-                    className='translate-x-[-3rem] translate-y-[-0.8rem]'
+                    className='absolute right-4 top-4'
                     src={EyeOff}
                     onClick={() => setInputType('password')}
                     alt="Eye close icon"

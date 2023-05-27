@@ -3,7 +3,7 @@ import { FC  } from 'react';
 import GoogleIcon from '../assets/google-icon.svg';
 import FacebookIcon from '../assets/facebook-icon.svg';
 import TwitterIcon from '../assets/twitter-icon.svg';
-import { useAuthProvider } from '../hooks/useAuthProvider';
+import { useAuthProvider } from '../hooks';
 
 type AuthButtonProps = {
   icon: string;

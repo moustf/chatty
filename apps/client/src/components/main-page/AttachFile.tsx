@@ -1,4 +1,4 @@
-import { FC, useRef, ChangeEvent, DragEventHandler, Dispatch, SetStateAction } from "react";
+import { FC, useRef, ChangeEvent, DragEventHandler } from 'react';
 
 export const AttachFile: FC<{
   isAttachMessageShow: boolean,

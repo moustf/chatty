@@ -1,21 +1,18 @@
 import { FC, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 import EmailIcon from '../../assets/EmailIcon.svg';
 import CalendarIcon from '../../assets/Calendar.svg';
 import { UpdatePasswordForm } from './UpdatePasswordForm';
-import { baseUrl } from '../../config/environment';
+import { apiClient } from '../../utils';
 
 export const UserProfileDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
-  axios.defaults.withCredentials = true;
-
   const [isFormVisible, setIsFormVisible] = useState<boolean>(false);
 
   // ? The personal information for the user request.
   const { data } = useQuery({
     queryKey: ['userData'],
-    queryFn: () => axios.get(`${baseUrl}/api/v1/user`, {
+    queryFn: () => apiClient.get('/user', {
       withCredentials: true,
     }),
     onError: (error) => console.log(error),
@@ -24,7 +21,7 @@ export const UserProfileDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => 
   // ? The request that checks if the user can change his password or not.
   const { data: isAllowed } = useQuery({
     queryKey: ['isAllowedToChangePassword'],
-    queryFn: () => axios.get(`${baseUrl}/api/v1/user/password`, {
+    queryFn: () => apiClient.get('user/password', {
       withCredentials: true,
     }),
     onError: (error) => console.log(error),

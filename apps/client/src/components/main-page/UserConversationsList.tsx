@@ -1,19 +1,16 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 import { UserConversationBox } from './UserConversationBox';
 import { useAppSelector } from '../../hooks/redux';
 import { selectIsChatsListShown } from '../../features/chat/chatSlice';
-import { baseUrl } from '../../config/environment';
+import { apiClient } from '../../utils';
 
 export const UserConversationList: FC = () => {
   const { data } = useQuery({
     queryKey: ['getUserConversations'],
     queryFn: () => (
-      axios.get(`${baseUrl}/api/v1/user/conversations`, {
-        withCredentials: true,
-      })
+      apiClient.get('/user/conversations')
     ),
   });
 
