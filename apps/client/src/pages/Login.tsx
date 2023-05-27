@@ -67,7 +67,7 @@ export const LoginPage: FC = () => {
             <h2 className="text-bold text-h3 md:text-h2 mb-8">Sign in to Chatty!</h2>
             <p className="text-subtitle1 text-grey-600">
               Don't you have an account?
-              <a className="text-[#2065D1] underline hover:text-info-darker visited:text-secondary" href="/sginup">Sign up</a>
+              <a className="text-[#2065D1] underline hover:text-info-darker visited:text-secondary" href="/signup">Sign up</a>
               {"  "}
               .
             </p>
@@ -89,7 +89,7 @@ export const LoginPage: FC = () => {
             />
             <button
               className={
-                `w-full h-14 mt-2 lg:mt-12 bg-secondary rounded-lg text-[#fff] text-btn font-bold cursor-pointer hover:shadow-secondary ${!isValid && 'cursor-not-allowed'}`
+                `w-full h-12 mt-2 lg:mt-8 bg-secondary rounded-lg text-[#fff] text-btn font-bold cursor-pointer hover:shadow-secondary ${!isValid && 'cursor-not-allowed'}`
               }
               type="submit"
               disabled={!isValid}
