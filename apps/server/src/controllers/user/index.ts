@@ -1,13 +1,5 @@
-import { changeUserPassword } from './changeUserPassword';
-import { checkUserPassword } from './checkUserPassword';
-import { getUserByIdController } from './getUserById';
-import { getUserConversations } from './getUserConversations';
-import { searchForUsers } from './searchForUsers';
-
-export {
-  getUserByIdController,
-  searchForUsers,
-  checkUserPassword,
-  changeUserPassword,
-  getUserConversations,
-};
+export * from './changeUserPassword';
+export * from './checkUserPassword';
+export * from './getUserById';
+export * from './getUserConversations';
+export * from './searchForUsers';

@@ -4,7 +4,7 @@ import { Server as SocketServer } from 'socket.io';
 import { SocketEventsMap } from '@chatty/types';
 
 import { config } from '../config/environments';
-import { addNewMessageService } from '../services/addNewMessage';
+import { addNewMessageService } from '../services';
 
 export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
   const chatTopic = io.of('/chat');

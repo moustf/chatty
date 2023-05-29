@@ -1,9 +1,7 @@
 import { StatusCodes, validateLoginData } from '@chatty/types';
 
 import { getUserByEmail } from '../queries/user';
-import { comparePasswords } from '../utils/bcrypt';
-import { GenericError } from '../utils/custom/GenericError';
-import { generateToken } from '../utils/jwt';
+import { comparePasswords, generateToken, GenericError } from '../utils';
 
 export const loginUser = async (email: string, password: string) => {
   await validateLoginData.validate({ email, password });

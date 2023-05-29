@@ -6,7 +6,7 @@ import {
   authController,
   loginController,
 } from '../controllers';
-import { userDataAuth } from '../middlewares/userAuth';
+import { userDataAuth } from '../middlewares';
 
 export const authRouter = Router();
 

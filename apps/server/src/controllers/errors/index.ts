@@ -1,4 +1,2 @@
-import { notFoundHandler } from './404';
-import { serverErrorHandler } from './500';
-
-export { notFoundHandler, serverErrorHandler };
+export * from './404';
+export * from './500';

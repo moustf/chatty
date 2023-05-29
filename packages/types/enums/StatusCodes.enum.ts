@@ -7,4 +7,6 @@ export enum StatusCodes {
   NotFound = 404,
   Unauthorized = 403,
   Unauthenticated = 401,
+  UnsupportedMediaType = 415,
+  ServerError = 500,
 }

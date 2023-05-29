@@ -7,8 +7,7 @@ import {
 } from '@chatty/types';
 
 import { getUser } from '../../queries/user';
-import { comparePasswords, hashPassword } from '../../utils/bcrypt';
-import { GenericError } from '../../utils/custom/GenericError';
+import { comparePasswords, hashPassword, GenericError } from '../../utils';
 
 export const changeUserPassword = async (
   req: CustomRequest,

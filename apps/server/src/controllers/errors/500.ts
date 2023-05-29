@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const serverErrorHandler = (
   error: GenericError,

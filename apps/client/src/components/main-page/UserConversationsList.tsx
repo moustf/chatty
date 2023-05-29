@@ -16,9 +16,11 @@ export const UserConversationList: FC = () => {
 
   const isChatsListShown = useAppSelector(selectIsChatsListShown);
 
+  console.log(isChatsListShown, 'Is chat list shown');
+
   return (
     <section
-      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 shadow-z24 flex flex-col gap-8 px-4 py-8 ${!isChatsListShown && 'hidden'} lg:flex`}
+      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 shadow-z24 flex flex-col gap-8 px-4 py-8 ${isChatsListShown && 'flex'} ${!isChatsListShown && 'hidden'} lg:flex`}
     >
       {
         data?.data.data.map((con: any) => {

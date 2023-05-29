@@ -2,7 +2,7 @@ import { Payload } from '@chatty/types';
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-  isChatsListShown: false,
+  isChatsListShown: true,
 };
 
 const setIsChatsListShownToFalseThunk = () => new Promise((res) => res(false));

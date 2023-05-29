@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from '@chatty/types';
 
 import { loginUser } from '../../services/login';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const loginController = async (
   req: Request,

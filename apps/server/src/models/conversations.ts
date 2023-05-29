@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
-import { Conversation as ConversationInterface } from '@chatty/types';
-
-import { mediaMimeTypes } from '../utils/helpers';
+import {
+  Conversation as ConversationInterface,
+  filesMimeTypes,
+} from '@chatty/types';
 
 const conversationsSchema = new mongoose.Schema<ConversationInterface>(
   {
@@ -27,7 +28,7 @@ const conversationsSchema = new mongoose.Schema<ConversationInterface>(
         },
         mediaType: {
           type: String,
-          enum: [...Object.keys(mediaMimeTypes)],
+          enum: [...Object.keys(filesMimeTypes)],
         },
         action: {
           type: String,

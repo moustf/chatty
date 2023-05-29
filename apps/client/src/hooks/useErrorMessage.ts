@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { FieldErrors } from 'react-hook-form';
 
 export const useErrorMessage = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');

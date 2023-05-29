@@ -1,4 +1,2 @@
-import { getAllMessages } from './getAllMessages';
-import { getConversation } from './getConversation';
-
-export { getConversation, getAllMessages };
+export * from './getAllMessages';
+export * from './getConversation';

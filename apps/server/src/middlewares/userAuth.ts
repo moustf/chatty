@@ -3,8 +3,7 @@ import { Response, NextFunction } from 'express';
 import { StatusCodes, CustomRequest } from '@chatty/types';
 
 import { getUser } from '../queries/user';
-import { GenericError } from '../utils/custom/GenericError';
-import { verifyToken } from '../utils/jwt';
+import { GenericError, verifyToken } from '../utils';
 
 export const userDataAuth = async (
   req: CustomRequest,

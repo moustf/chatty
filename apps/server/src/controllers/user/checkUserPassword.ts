@@ -3,7 +3,7 @@ import { Response, NextFunction } from 'express';
 import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getUser } from '../../queries/user';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const checkUserPassword = async (
   req: CustomRequest,

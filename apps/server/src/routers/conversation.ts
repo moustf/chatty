@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { getConversation, getAllMessages } from '../controllers';
-import { userDataAuth } from '../middlewares/userAuth';
+import { userDataAuth } from '../middlewares';
 
 export const conversationRouter = Router();
 

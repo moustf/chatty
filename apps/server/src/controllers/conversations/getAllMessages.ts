@@ -8,7 +8,7 @@ import {
 } from '@chatty/types';
 
 import { getAllMessagesQuery } from '../../queries/conversations';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const getAllMessages = async (
   req: CustomRequest,

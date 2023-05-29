@@ -3,7 +3,7 @@ import { Response, NextFunction } from 'express';
 import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getConversationQuery } from '../../queries/conversations';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const getConversation = async (
   req: CustomRequest,

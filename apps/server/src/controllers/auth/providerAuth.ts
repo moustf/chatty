@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { userDataRouteSchema, StatusCodes } from '@chatty/types';
 
 import { User } from '../../models/users';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const providerAuth = async (
   req: Request,
