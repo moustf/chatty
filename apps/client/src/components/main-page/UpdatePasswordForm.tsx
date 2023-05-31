@@ -2,12 +2,11 @@ import { FC } from 'react';
 import { useForm, SubmitHandler, FieldValue, Controller } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 
 import { userOldNewPasswordsSchema } from '@chatty/types';
+import { apiClient } from '../../utils';
 
-import { baseUrl } from '../../config/environment';
 
 type ChangePasswords = {
   oldPassword: string;
@@ -26,9 +25,7 @@ export const UpdatePasswordForm: FC = () => {
     resolver: yupResolver(userOldNewPasswordsSchema),
   });
   const { mutate } = useMutation({
-    mutationFn: (data: ChangePasswords) => axios.put(`${baseUrl}/api/v1/user/password`, data, {
-      withCredentials: true,
-    }),
+    mutationFn: (data: ChangePasswords) => apiClient.put('/user/password', data),
     onSuccess: () => {
       Swal.fire({
         position: 'top-end',

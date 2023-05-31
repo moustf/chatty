@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { StatusCodes } from '@chatty/types';
 
 import { searchForUser } from '../../queries/user';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const searchForUsers = async (
   req: Request,
@@ -15,7 +15,7 @@ export const searchForUsers = async (
 
     if (!q) {
       throw new GenericError(
-        STATUS_CODES.WRONG_DATA,
+        StatusCodes.WrongData,
         'The text you are searching with does not belong to any user!'
       );
     }
@@ -24,7 +24,7 @@ export const searchForUsers = async (
 
     if (!user.length) {
       throw new GenericError(
-        STATUS_CODES.NOT_FOUND,
+        StatusCodes.NotFound,
         'The user you are searching for does not exist!'
       );
     }

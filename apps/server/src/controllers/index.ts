@@ -1,31 +1,5 @@
-import {
-  providerAuth,
-  authController,
-  signupController,
-  loginController,
-} from './auth/';
-import { getConversation, getAllMessages } from './conversations';
-import { notFoundHandler, serverErrorHandler } from './errors';
-import {
-  getUserByIdController,
-  checkUserPassword,
-  searchForUsers,
-  changeUserPassword,
-  getUserConversations,
-} from './user';
-
-export {
-  signupController,
-  serverErrorHandler,
-  authController,
-  notFoundHandler,
-  providerAuth,
-  loginController,
-  getUserByIdController,
-  checkUserPassword,
-  searchForUsers,
-  changeUserPassword,
-  getUserConversations,
-  getConversation,
-  getAllMessages,
-};
+export * from './auth';
+export * from './conversations';
+export * from './errors';
+export * from './services';
+export * from './user';

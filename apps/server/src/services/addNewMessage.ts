@@ -8,8 +8,7 @@ import { Socket } from 'socket.io';
 import { AddMessageParameters, validateMessageData } from '@chatty/types';
 
 import { addNewMessageQuery, getLatestMessage } from '../queries/conversations';
-
-const { uploadObject } = require('../../bucket');
+// import { uploadObject } from '../utils';
 
 type AddMessageParametersWithSocket = AddMessageParameters & { socket: Socket };
 
@@ -34,12 +33,10 @@ const addMessageWithFile = async (
   );
 
   // ? After writing the file, we read it,
-  const imageData = await asyncReadFile(
-    join(__dirname, '..', 'assets', fileName)
-  );
+  await asyncReadFile(join(__dirname, '..', 'assets', fileName));
 
   // ? In order to pass it to the upload method to upload it to the Spaces Bucket.
-  await uploadObject(fileName, imageData);
+  // await uploadObject(imageData as any);
 
   //? We then create a url bar friendly url to pass it to the query.
   const urlFriendlyFileName = fileName.replace(/\s/g, '%');

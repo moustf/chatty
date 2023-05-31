@@ -1,8 +1,7 @@
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
 import { Payload } from '@chatty/types';
-import axios from 'axios';
 
-import { baseUrl } from '../../config/environment';
+import { apiClient } from '../../utils';
 
 const initialState = {
   userData: { id: '', email: '', iat: 0 },
@@ -37,12 +36,12 @@ export const selectError = createSelector(
 
 // ? Thunk function and its fetcher helper functions.
 
-const fetchUserData = () => axios.post(`${baseUrl}/api/v1/auth/`, {}, {
+const fetchUserData = () => apiClient.post('/auth', {}, {
   withCredentials: true,
 });
 export const setUserData = createAsyncThunk('auth/setUserData', fetchUserData);
 
-const logout = () => axios.post(`${baseUrl}/api/v1/auth/logout`, {}, {
+const logout = () => apiClient.post('/auth/logout', {}, {
   withCredentials: true,
 });
 export const clearUserData = createAsyncThunk('auth/clearUserData', logout);

@@ -1,13 +1,12 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useAppSelector } from '../../hooks/redux';
-import { selectIsChatsListShown } from '../../features/chat/chatSlice';
-import axios from 'axios';
 
+import { useAppSelector } from '../../hooks';
+import { selectIsChatsListShown } from '../../features/chat/chatSlice';
 import { ChatWindowHeading } from './chatWindowHeading';
 import { SendChatMessage } from './SendChatMessage';
-import { baseUrl } from '../../config/environment';
+import { apiClient } from '../../utils';
 
 export const ChatWindow: FC = () => {
   const { chatId } = useParams();
@@ -16,7 +15,7 @@ export const ChatWindow: FC = () => {
 
   const { data } = useQuery({
     queryKey: [`getChatDetails/${chatId}`],
-    queryFn: async () => axios.get(`${baseUrl}/api/v1/conversations?chatId=${chatId}`),
+    queryFn: async () => apiClient.get(`/conversations?chatId=${chatId}`),
   });
 
   const chatData = data?.data.data[0];

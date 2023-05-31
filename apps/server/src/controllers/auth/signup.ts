@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { STATUS_CODES, userDataSchema } from '@chatty/types';
+import { StatusCodes, userDataRouteSchema } from '@chatty/types';
 
 import { registerUser } from '../../services/signup';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const signupController = async (
   req: Request,
@@ -13,19 +13,19 @@ export const signupController = async (
   try {
     const { body } = req;
 
-    await userDataSchema.validate(body);
+    await userDataRouteSchema.validate(body);
 
     const { user, token } = await registerUser(body);
 
     return res
       .cookie('token', token, { httpOnly: true })
-      .status(STATUS_CODES.CREATED)
+      .status(StatusCodes.Created)
       .json({ msg: "The user's account is created successfully!", data: user });
   } catch (error) {
     if (error.name === 'ValidationError') {
       return next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'The user has provided wrong data!'
         )
       );

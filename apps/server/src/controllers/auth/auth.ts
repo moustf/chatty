@@ -1,6 +1,12 @@
 import { Response, NextFunction } from 'express';
 
-export const authController = (req: any, res: Response, next: NextFunction) => {
+import { CustomRequest } from '@chatty/types';
+
+export const authController = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { user } = req;
 

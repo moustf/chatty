@@ -1,13 +1,12 @@
 import { Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { StatusCodes, CustomRequest } from '@chatty/types';
 
 import { getUser } from '../queries/user';
-import { GenericError } from '../utils/custom/GenericError';
-import { verifyToken } from '../utils/jwt';
+import { GenericError, verifyToken } from '../utils';
 
 export const userDataAuth = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
@@ -15,13 +14,13 @@ export const userDataAuth = async (
     const { token } = req.cookies;
 
     if (!token) {
-      throw new GenericError(STATUS_CODES.UNAUTHENTICATED, 'Unauthenticated!');
+      throw new GenericError(StatusCodes.Unauthenticated, 'Unauthenticated!');
     }
 
     const user = await getUser({ token });
 
     if (user?.email) {
-      req.user = { id: user._id, email: user.email };
+      req.user = { id: user._id.toString(), email: user.email };
       next();
     }
 
@@ -33,7 +32,7 @@ export const userDataAuth = async (
     if (error.name === 'invalid signature') {
       next(
         new GenericError(
-          STATUS_CODES.WRONG_DATA,
+          StatusCodes.WrongData,
           'The token provided is not valid!'
         )
       );

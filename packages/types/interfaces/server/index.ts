@@ -7,3 +7,4 @@ export * from './Users';
 export * from './MessageData';
 export * from './AddMessageParameters';
 export * from './GetMessagesParameter';
+export * from './CustomRequest';
