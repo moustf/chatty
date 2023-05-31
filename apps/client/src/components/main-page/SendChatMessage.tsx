@@ -6,13 +6,14 @@ import { selectUerData, setUserData } from '../../features/auth/authSlice';
 import AttachIcon from '../../assets/attach.svg';
 import SendIcon from '../../assets/send.svg';
 import { AttachFile } from './AttachFile';
-import { uploadData } from '../../utils';
+import { errorSwalMessage, uploadData } from '../../utils';
 
 export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
   const inputRef = useRef<HTMLInputElement | any>();
   const [message, setMessage] = useState<string>('');
   const [isAttachFileShown, setIsAttachFileShown] = useState<boolean>(false);
-  const [readUrls, setReadUrls] = useState<string[]>([]);
+  const [files, setFiles] = useState<FileList | null>(null);
+  const [isAllowedToSend, setIsAllowedToSend] = useState<boolean>(false);
 
   const { socket, isConnected } = useConnect();
   const dispatch = useAppDispatch();
@@ -24,10 +25,20 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
 
   const { id } = useAppSelector(selectUerData); // ? Current user id.
 
-  const handleFileUpload = async (file: File) => {
-    const readUrl = await uploadData(file);
-    setReadUrls((prevState) => [...prevState, readUrl]);
-    return readUrl;
+  const sendNewMessage = async () => {
+    let readUrls = [];
+    if (files) {
+      readUrls = await uploadData(files);
+    }
+
+    if (isConnected) {
+      // ? Joining the conversation's room.
+      socket.emit('join-room', `conversation:${chatId}`, id);
+
+      const dataToBeSent = {
+
+      }
+    }
   };
 
   return (
@@ -61,9 +72,13 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
               className="cursor-pointer"
               onClick={() => setIsAttachFileShown((prevValue) => !prevValue)}
             />
-            <AttachFile isAttachMessageShow={isAttachFileShown} handleFileUpload={handleFileUpload} filesNum={readUrls.length} />
+            <AttachFile isAttachMessageShow={isAttachFileShown} files={files} setFiles={setFiles} />
           </div>
-          <div className="w-11 h-11 rounded-full cursor-pointer bg-[#4C7CFD] hover:bg-[#0044FC] flex justify-center items-center">
+          <div
+            className={
+              `w-11 h-11 rounded-full bg-[#4C7CFD] hover:bg-[#0044FC] flex justify-center items-center ${isAllowedToSend ? 'cursor-pointer' : 'cursor-not-allowed'}`
+            }
+          >
             <img
               src={SendIcon}
               alt="send icon"
