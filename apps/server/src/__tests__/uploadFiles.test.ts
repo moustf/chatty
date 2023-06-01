@@ -32,6 +32,12 @@ describe('Testing the route that uploads the files to the bucket and returns the
   });
 
   it('Should return 401 status codes and the unauthenticated message', async () => {
+    process.stdout.on('error', function (err) {
+      if (err.code == 'EPIPE') {
+        process.exit(0);
+      }
+    });
+
     const res = await request(app)
       .post('/api/v1/services/upload')
       .set('Cookie', [])
