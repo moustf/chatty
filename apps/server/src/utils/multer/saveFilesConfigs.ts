@@ -6,6 +6,8 @@ import { mimeTypes, StatusCodes } from '@chatty/types';
 import { GenericError } from '../custom';
 
 const fileFilter = (_req: Request, file: Express.Multer.File, cb: any) => {
+  console.log('It reached multer!!!');
+
   if (mimeTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
