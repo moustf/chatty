@@ -34,7 +34,7 @@ export const userDataAuth = async (
     next();
   } catch (error: any) {
     if (error.name === 'invalid signature') {
-      next(
+      return next(
         new GenericError(
           StatusCodes.WrongData,
           'The token provided is not valid!'
@@ -47,6 +47,6 @@ export const userDataAuth = async (
       });
     }
 
-    next(error);
+    return next(error);
   }
 };

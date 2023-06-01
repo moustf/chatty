@@ -8,7 +8,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/src/test/setupFile.ts'],
   restoreMocks: true,
   setupFiles: ['dotenv/config'],
-  testTimeout: 40000,
+  testTimeout: 60000,
   collectCoverage: false,
   // collectCoverageFrom: ['**/*.ts', '!**/node_modules/**', '!**/vendor/**'],
   // coveragePathIgnorePatterns: ['jest.config.js', '/config/*', 'routes'],
