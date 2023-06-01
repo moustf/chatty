@@ -14,6 +14,7 @@ export const userDataAuth = async (
     const { token } = req.cookies;
 
     if (!token) {
+      console.log('No token error!!!');
       throw new GenericError(StatusCodes.Unauthenticated, 'Unauthenticated!');
     }
 
@@ -27,7 +28,7 @@ export const userDataAuth = async (
     const decoded = (await verifyToken(token)) as { email: string };
 
     req.user = { id: user?.id, ...decoded };
-    next();
+    return next();
   } catch (error: any) {
     if (error.name === 'invalid signature') {
       return next(
