@@ -34,6 +34,7 @@ describe('Testing the route that uploads the files to the bucket and returns the
   it('Should return 401 status codes and the unauthenticated message', async () => {
     const res = await request(app)
       .post('/api/v1/services/upload')
+      .set('Cookie', [])
       .attach(
         'file',
         join(__dirname, '.', 'testImages', 'product1.jpg'),
