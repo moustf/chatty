@@ -46,6 +46,8 @@ describe('Testing the route that uploads the files to the bucket and returns the
       )
       .expect(401);
 
+    console.log(res, 'CI failing test response!!!');
+
     expect(res.body.msg).toBe('Unauthenticated!');
   });
 
