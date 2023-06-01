@@ -2,14 +2,14 @@ import { FC, useRef, ChangeEvent, DragEventHandler, Dispatch, SetStateAction } f
 
 export const AttachFile: FC<{
   isAttachMessageShow: boolean,
-  setFiles: Dispatch<SetStateAction<FileList | null>>,
+  handleFilesChange: (files: FileList) => void,
   files: FileList | null,
-}> = ({ isAttachMessageShow, setFiles, files }) => {
+}> = ({ isAttachMessageShow, handleFilesChange, files }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
 
   const onFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFiles(e.target?.files as FileList);
+    handleFilesChange(e.target?.files as FileList);
   };
 
   const dragEnterHandler: DragEventHandler<HTMLDivElement> = (e: any) => {
@@ -27,7 +27,7 @@ export const AttachFile: FC<{
     e.preventDefault();
 
     const dt = e.dataTransfer;
-    setFiles(dt.files);
+    handleFilesChange(dt.files);
   };
 
   return (

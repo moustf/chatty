@@ -25,10 +25,15 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
 
   const { id } = useAppSelector(selectUerData); // ? Current user id.
 
+  const handleFilesChange = (files: FileList) => {
+    setFiles(files);
+    setIsAllowedToSend(true);
+  };
+
   const sendNewMessage = async () => {
-    let readUrls = [];
+    let filesUris = [];
     if (files) {
-      readUrls = await uploadData(files);
+      filesUris = await uploadData(files);
     }
 
     if (isConnected) {
@@ -36,8 +41,19 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
       socket.emit('join-room', `conversation:${chatId}`, id);
 
       const dataToBeSent = {
+        chatId,
+        type: 'message',
+        text: message,
+        filesUris,
+      };
 
-      }
+      socket.emit('newMessage', JSON.stringify(dataToBeSent));
+
+      socket.on('newErrorMessage', (data) => {
+        const { message, error } = JSON.parse(data);
+
+        errorSwalMessage(message || error.message);
+      });
     }
   };
 
@@ -54,7 +70,10 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
           id="message"
           value={message}
           ref={inputRef}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            setIsAllowedToSend(true);
+          }}
           placeholder="Write something ..."
           className="w-2/3 h-16 border-0 hover:border-2 hover:border-solid hover:border-black border-box px-8 rounded-full"
         />
@@ -72,7 +91,11 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
               className="cursor-pointer"
               onClick={() => setIsAttachFileShown((prevValue) => !prevValue)}
             />
-            <AttachFile isAttachMessageShow={isAttachFileShown} files={files} setFiles={setFiles} />
+            <AttachFile
+              isAttachMessageShow={isAttachFileShown}
+              files={files}
+              handleFilesChange={handleFilesChange}
+            />
           </div>
           <div
             className={
@@ -80,6 +103,9 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
             }
           >
             <img
+              onClick={() => {
+                isAllowedToSend && sendNewMessage();
+              }}
               src={SendIcon}
               alt="send icon"
               width="24"
@@ -91,77 +117,3 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
     </section>
   );
 };
-
-
-// const emitNewMessage = async (
-//   type: string,
-//   fileName: string | null,
-//   fileData: ArrayBuffer | string | null,
-// ) => {
-//   if (isConnected) {
-//     socket.emit('join-room', `conversation:${chatId}`, id);
-
-//     if (type === 'image') {
-//       // const unit8Array = new Uint8Array(fileData as ArrayBuffer);
-//       // const base64String = window.btoa(String.fromCharCode.apply(null, Array.from(unit8Array)));
-
-//       await uploadData(files?.[0] as File);
-
-//       // ? Emit new message with the image type.
-//       // socket.emit('newMessage', JSON.stringify({
-//       //   type,
-//       //   fileName,
-//       //   fileData: base64String,
-//       // }));
-
-//       // TODO: Listen to new single message event and add the data to the
-//       // TODO: to the new messages array.
-//     } else if (type === 'text') {
-//       // ? Emit new message with the text type.
-//       socket.emit('newMessage', JSON.stringify({
-//         type,
-//         text: message,
-//       }));
-//     }
-
-//     socket.on('newMessageReturn', (data: any) => {
-//     });
-//   };
-// }
-
-// const asyncEmitMessagePerFile = async () => {
-//   let counter = 1;
-//   try {
-//     const len = files?.length || 0;
-//     if (len > 0) {
-//       // ? If the files list has items, do:
-//       for (const file of (files as FileList)) {
-//         // ? Create new File Reader instance for each file, hence using const So,
-//         // ? each file will take it's own instance and multiple files will get served correctly.
-//         const reader = new FileReader();
-
-//         // ? Modifying the file to array of buffers.
-//         reader.readAsArrayBuffer(file);
-
-//         reader.onload = () => {
-//           if (reader.readyState === 2) {
-//             // ? When the reading as buffer array gets done, send the result to emitNewMessage function.
-//             const data = reader.result;
-//             emitNewMessage('image', file.name, data);
-//           }
-//         }
-
-//         counter++;
-//       }
-
-//     } else {
-//       // ? Single text call.
-//       emitNewMessage('text', null, null);
-//     }
-
-//     // ? Empty the input field.
-//     inputRef.current.value = '';
-//   } catch (error) {
-//     console.log(error, `Error Happened In File Num #${counter}`)
-//   }
-// }
