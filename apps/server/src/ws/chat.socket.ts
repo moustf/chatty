@@ -9,8 +9,6 @@ import { addNewMessageService } from '../services';
 export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
   const chatTopic = io.of('/chat');
 
-  console.log("I don't think it will even reach here!!!");
-
   chatTopic.on('connection', (socket) => {
     config.nodeEnv === 'development' && console.log(socket.id, 'connected');
 

@@ -12,11 +12,7 @@ export const uploadFiles = async (
   try {
     const { files } = req;
 
-    console.log('Finally, in the controller!!!');
-
     if (!files?.length) {
-      console.log('No files are here, the controller is present!!!');
-
       throw new GenericError(
         StatusCodes.WrongData,
         "The user hasn't sent any files!"
@@ -24,8 +20,6 @@ export const uploadFiles = async (
     }
 
     const paths = await uploadMany(files as Express.Multer.File[], []);
-
-    console.log(paths, 'Paths are returned tot he controller!!!');
 
     return res.json({ data: paths, msg: 'Images uploaded successfully!' });
   } catch (error) {

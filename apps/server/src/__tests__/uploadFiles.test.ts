@@ -1,12 +1,24 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { join } from 'path';
 
 import request from 'supertest';
 
 import { app } from '../server';
-import { getUserTokenFromLogin } from '../utils';
+import { getUserTokenFromLogin, uploadMany } from '../utils';
+
+jest.mock('../utils/helpers/bucketUpload');
 
 describe('Testing the route that uploads the files to the bucket and returns their URIs', () => {
   it('Should return 200 status codes and the bucket images URIs', async () => {
+    (uploadMany as jest.MockedFunction<typeof uploadMany>).mockImplementation(
+      (_files, _result) => {
+        return Promise.resolve([
+          'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image1.jpg',
+          'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image2.jpg',
+        ]);
+      }
+    );
+
     const mustafaToken = await getUserTokenFromLogin(
       'mustafa@gmail.com',
       'Root@123'
@@ -32,6 +44,15 @@ describe('Testing the route that uploads the files to the bucket and returns the
   });
 
   it('Should return 401 status codes and the unauthenticated message', async () => {
+    (uploadMany as jest.MockedFunction<typeof uploadMany>).mockImplementation(
+      (_files, _result) => {
+        return Promise.resolve([
+          'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image1.jpg',
+          'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image2.jpg',
+        ]);
+      }
+    );
+
     const res = await request(app)
       .post('/api/v1/services/upload')
       .set('Cookie', [])
@@ -47,12 +68,19 @@ describe('Testing the route that uploads the files to the bucket and returns the
       )
       .expect(401);
 
-    console.log(res, 'CI failing test response!!!');
-
     expect(res.body.msg).toBe('Unauthenticated!');
   });
 
   it('Should return 400 status codes and the wrong data error message', async () => {
+    (uploadMany as jest.MockedFunction<typeof uploadMany>).mockImplementation(
+      (_files, _result) => {
+        return Promise.resolve([
+          'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image1.jpg',
+          'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image2.jpg',
+        ]);
+      }
+    );
+
     const mustafaToken = await getUserTokenFromLogin(
       'mustafa@gmail.com',
       'Root@123'
