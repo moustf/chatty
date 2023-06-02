@@ -1,15 +1,15 @@
-import { FC, useRef, ChangeEvent, DragEventHandler } from 'react';
+import { FC, useRef, ChangeEvent, DragEventHandler, Dispatch, SetStateAction } from "react";
 
 export const AttachFile: FC<{
   isAttachMessageShow: boolean,
-  handleFileUpload: (file: File) => Promise<string>,
-  filesNum: number;
-}> = ({ isAttachMessageShow, handleFileUpload, filesNum }) => {
+  handleFilesChange: (files: FileList) => void,
+  files: FileList | null,
+}> = ({ isAttachMessageShow, handleFilesChange, files }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
 
   const onFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleFileUpload(e.target?.files?.[0] as File);
+    handleFilesChange(e.target?.files as FileList);
   };
 
   const dragEnterHandler: DragEventHandler<HTMLDivElement> = (e: any) => {
@@ -27,7 +27,7 @@ export const AttachFile: FC<{
     e.preventDefault();
 
     const dt = e.dataTransfer;
-    handleFileUpload(dt.files[0]);
+    handleFilesChange(dt.files);
   };
 
   return (
@@ -70,7 +70,7 @@ export const AttachFile: FC<{
         </div>
         <p className="text-subtitle1 text-grey-700">
           <span className="text-secondary text-bold text-[1.3rem]">
-            {filesNum || 0}
+            {files?.length || 0}
           </span>
           {' '}
           files selected!
@@ -78,4 +78,4 @@ export const AttachFile: FC<{
       </section>
     </section>
   );
-};
+  };

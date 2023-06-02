@@ -146,9 +146,9 @@ const collections = [
           {
             type: 'text',
             text: 'Hello',
-            media:
-              'https://chatty-bucket.fra1.cdn.digitaloceanspaces.com/Screenshot%20from%202023-05-21%2023-32-58.png',
-            mediaType: 'png',
+            media: [
+              'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/question1.png',
+            ],
             sender: new mongoose.Types.ObjectId('6357f708ed0c57054008e300'),
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -226,9 +226,9 @@ const collections = [
           {
             type: 'message',
             text: 'Hi all',
-            media:
-              'https://chatty-bucket.fra1.cdn.digitaloceanspaces.com/Screenshot%20from%202023-05-21%2023-32-58.png',
-            mediaType: 'png',
+            media: [
+              'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image2.jpg',
+            ],
             sender: new mongoose.Types.ObjectId('2587f708ed0c57054008e500'),
             createdAt: new Date(),
             updatedAt: new Date(),
@@ -242,8 +242,9 @@ const collections = [
           },
           {
             type: 'message',
-            image:
-              'https://images.pexels.com/photos/8289647/pexels-photo-8289647.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+            media: [
+              'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image1.jpg',
+            ],
             sender: '6411bd24231678cfdf841048',
             createdAt: new Date(),
             updatedAt: new Date(),

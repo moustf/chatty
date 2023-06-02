@@ -6,8 +6,6 @@ import { StatusCodes } from '@chatty/types';
 import { s3Client } from '../../aws';
 import { GenericError } from '../custom';
 
-// ? The s3Client function validates your request adn directs it to your Space's specified endpoint using the AWS SDK.
-
 // ? Define a function that uploads your object using SDK's PutObjectCommand object and catch any errors.
 export const uploadObject = async (file: Express.Multer.File) => {
   // ? Define the parameters for the object you want to upload.

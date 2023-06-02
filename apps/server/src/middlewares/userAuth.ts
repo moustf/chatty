@@ -27,10 +27,10 @@ export const userDataAuth = async (
     const decoded = (await verifyToken(token)) as { email: string };
 
     req.user = { id: user?.id, ...decoded };
-    next();
+    return next();
   } catch (error: any) {
     if (error.name === 'invalid signature') {
-      next(
+      return next(
         new GenericError(
           StatusCodes.WrongData,
           'The token provided is not valid!'
@@ -43,6 +43,6 @@ export const userDataAuth = async (
       });
     }
 
-    next(error);
+    return next(error);
   }
 };

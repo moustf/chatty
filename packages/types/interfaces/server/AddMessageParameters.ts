@@ -3,6 +3,6 @@ export type AddMessageParameters = {
   userId: string;
   type: string;
   text: string;
-  fileName: string;
-  fileData: string;
+  action: string;
+  filesUris: string[];
 };

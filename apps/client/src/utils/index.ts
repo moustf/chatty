@@ -1,5 +1,5 @@
 export * from './formatTime';
-export * from './getPreSignedPutUrl';
+export * from './uploadImagesToBucket';
 export * from './services/apiClient';
 export * from './errorSwalMessage';
 export * from './successSwalMessage';

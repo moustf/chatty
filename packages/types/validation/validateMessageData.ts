@@ -1,11 +1,12 @@
-import { object, string } from 'yup';
+import { object, string, array } from 'yup';
 
 export const validateMessageData = object({
   userId: string().required(),
+  chatId: string().required(),
   type: string()
-    .matches(/image|text|action/)
+    .matches(/message|action/)
     .required(),
   text: string(),
-  fileName: string(),
-  fileData: string(),
+  action: string(),
+  filesUris: array(string()),
 });
