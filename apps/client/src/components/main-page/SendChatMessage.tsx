@@ -13,7 +13,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
   const [message, setMessage] = useState<string>('');
   const [isAttachFileShown, setIsAttachFileShown] = useState<boolean>(false);
   const [files, setFiles] = useState<FileList | null>(null);
-  const [isAllowedToSend, setIsAllowedToSend] = useState<boolean>(false);
 
   const { socket, isConnected } = useConnect();
   const dispatch = useAppDispatch();
@@ -27,7 +26,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
 
   const handleFilesChange = (files: FileList) => {
     setFiles(files);
-    setIsAllowedToSend(true);
   };
 
   const sendNewMessage = async () => {
@@ -72,7 +70,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
           ref={inputRef}
           onChange={(e) => {
             setMessage(e.target.value);
-            setIsAllowedToSend(true);
           }}
           placeholder="Write something ..."
           className="w-2/3 h-16 border-0 hover:border-2 hover:border-solid hover:border-black border-box px-8 rounded-full"
@@ -99,12 +96,12 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
           </div>
           <div
             className={
-              `w-11 h-11 rounded-full bg-[#4C7CFD] hover:bg-[#0044FC] flex justify-center items-center ${isAllowedToSend ? 'cursor-pointer' : 'cursor-not-allowed'}`
+              `w-11 h-11 rounded-full bg-[#4C7CFD] hover:bg-[#0044FC] flex justify-center items-center ${message && files?.length ? 'cursor-pointer' : 'cursor-not-allowed'}`
             }
           >
             <img
               onClick={() => {
-                isAllowedToSend && sendNewMessage();
+                message && files?.length && sendNewMessage();
               }}
               src={SendIcon}
               alt="send icon"
