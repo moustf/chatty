@@ -58,7 +58,6 @@ export const addNewMessageService = async (
 
     socket.to(chatId).emit('returnedMessage', JSON.stringify(newMessage));
   } catch (error) {
-    console.log(error);
     handleError(error, socket);
   }
 };

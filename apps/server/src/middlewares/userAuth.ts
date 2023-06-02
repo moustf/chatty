@@ -14,7 +14,6 @@ export const userDataAuth = async (
     const { token } = req.cookies;
 
     if (!token) {
-      console.log('No token error!!!');
       throw new GenericError(StatusCodes.Unauthenticated, 'Unauthenticated!');
     }
 

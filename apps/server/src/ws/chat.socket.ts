@@ -10,7 +10,7 @@ export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
   const chatTopic = io.of('/chat');
 
   chatTopic.on('connection', (socket) => {
-    config.nodeEnv === 'development' && console.log(socket.id, 'connected');
+    config.nodeEnv !== 'production' && console.log(socket.id, 'connected');
 
     socket.on('ping', () => socket.emit('pong'));
 
@@ -32,5 +32,9 @@ export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
         });
       });
     });
+  });
+
+  chatTopic.on('disconnection', (socket) => {
+    config.nodeEnv !== 'production' && console.log(socket.id, 'disconnected');
   });
 };

@@ -7,6 +7,7 @@ export type SocketEventsMap = {
   ping: () => void;
   pong: () => void;
   connection: (socket: Socket) => void;
+  disconnection: (socket: Socket) => void;
   newMessage: (data: string) => void;
   newErrorMessage: (data: string) => void;
   returnedMessage: (data: any) => void;
