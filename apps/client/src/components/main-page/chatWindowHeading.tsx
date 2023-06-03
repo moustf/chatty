@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { ConversationsImageHeading } from '@chatty/types';
 
 import { ConversationsImage } from './ConversationsImage';
-import { useAppDispatch } from '../../hooks';
-import { setIsChatListShownToTrue } from '../../features/chat/chatSlice';
+import { useAppDispatch } from '../../hooks/redux';
+import { setChatsListShownToTrueAction } from '../../features/chat/chatSlice';
 import SeeMoreIcon from '../../assets/see-more.svg';
 import ArrowLeftIcon from '../../assets/arrow-left.svg';
 import { useNavigate } from 'react-router-dom';
@@ -21,10 +21,7 @@ export const ChatWindowHeading: FC<ConversationsImageHeading> = ({
       >
         <div
           className="w-8 h-8 rounded-full border border-solid border-black cursor-pointer flex justify-center items-center hover:border-0 hover:bg-grey"
-          onClick={() => {
-            dispatch(setIsChatListShownToTrue());
-            navigate('/main');
-          }}
+          onClick={() => dispatch(setChatsListShownToTrueAction(true))}
         >
           <img
             src={ArrowLeftIcon}

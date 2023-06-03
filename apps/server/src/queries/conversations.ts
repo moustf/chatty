@@ -210,6 +210,7 @@ export const getAllMessagesQuery = (
     },
     {
       $project: {
+        _id: 1,
         messages: 1,
       },
     },
@@ -217,15 +218,15 @@ export const getAllMessagesQuery = (
       $unwind: '$messages',
     },
     {
+      $skip: offset || 0,
+    },
+    {
+      $limit: limit || 1,
+    },
+    {
       $sort: {
         createdAt: -1,
       },
-    },
-    {
-      $skip: offset,
-    },
-    {
-      $limit: limit,
     },
     {
       $lookup: {
@@ -240,7 +241,6 @@ export const getAllMessagesQuery = (
     },
     {
       $project: {
-        id: '$messages._id',
         user: '$senders._id',
         type: '$messages.type',
         text: '$messages.text',

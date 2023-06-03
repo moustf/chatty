@@ -1,3 +1,5 @@
+import { CustomMessagesHashTableTypes } from '../index';
+
 export type Payload = {
   auth: {
     userData: { id: string; email: string; iat: number };
@@ -5,4 +7,5 @@ export type Payload = {
     error: string;
   };
   chat: { isChatsListShown: boolean };
+  message: CustomMessagesHashTableTypes;
 };

@@ -21,12 +21,11 @@ export const createErrorAction = (payload: any): { type: string; payload: any } 
 });
 
 // ? State selector functions.
-
 export const selectUerData = createSelector(
   // * First, we pass one or more "input selector" functions.
   (state: Payload) => state.auth.userData,
   // * Then we return output, we can do any logic with it.
-  (userData: { id: string, email: string, iat: number }) => userData,
+  (userData: { id: string; email: string; iat: number; }) => userData,
 );
 
 export const selectError = createSelector(

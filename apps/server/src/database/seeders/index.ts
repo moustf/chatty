@@ -245,7 +245,7 @@ const collections = [
             media: [
               'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image1.jpg',
             ],
-            sender: '6411bd24231678cfdf841048',
+            sender: new mongoose.Types.ObjectId('6411bd24231678cfdf841048'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
