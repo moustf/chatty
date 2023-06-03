@@ -138,7 +138,8 @@ export const getConversationQuery = (id: string, userId: string) =>
 export const addNewMessageQuery = (id: string, data: MessageData) =>
   Conversation.updateOne(
     { _id: new mongoose.Types.ObjectId(id) },
-    { $push: { messages: data } }
+    { $push: { messages: data } },
+    { new: true }
   );
 
 export const findChatById = (id: string) =>
@@ -217,15 +218,15 @@ export const getAllMessagesQuery = (
       $unwind: '$messages',
     },
     {
+      $skip: offset || 0,
+    },
+    {
+      $limit: limit || 1,
+    },
+    {
       $sort: {
         createdAt: -1,
       },
-    },
-    {
-      $skip: offset,
-    },
-    {
-      $limit: limit,
     },
     {
       $lookup: {

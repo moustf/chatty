@@ -146,14 +146,17 @@ const collections = [
           {
             type: 'text',
             text: 'Hello',
-            sender: '6357f708ed0c57054008e300',
+            media: [
+              'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/question1.png',
+            ],
+            sender: new mongoose.Types.ObjectId('6357f708ed0c57054008e300'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
             type: 'text',
             text: 'Hi there!',
-            sender: '123ea40720dcfa02e0ae42db',
+            sender: new mongoose.Types.ObjectId('123ea40720dcfa02e0ae42db'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
@@ -221,30 +224,34 @@ const collections = [
         ],
         messages: [
           {
-            type: 'text',
+            type: 'message',
             text: 'Hi all',
+            media: [
+              'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image2.jpg',
+            ],
             sender: new mongoose.Types.ObjectId('2587f708ed0c57054008e500'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
-            type: 'text',
+            type: 'message',
             text: 'Hello there!',
             sender: new mongoose.Types.ObjectId('6411bd4547dc76574443c75a'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
-            type: 'image',
-            image:
-              'https://images.pexels.com/photos/8289647/pexels-photo-8289647.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
-            sender: '6411bd24231678cfdf841048',
+            type: 'message',
+            media: [
+              'https://chatty-bucket.fra1.digitaloceanspaces.com/uploads/image1.jpg',
+            ],
+            sender: new mongoose.Types.ObjectId('6411bd24231678cfdf841048'),
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
             type: 'action',
-            text: 'added',
+            action: 'add',
             sender: new mongoose.Types.ObjectId('147ea40720dcfa02e0ae42db'),
             createdAt: new Date(),
             updatedAt: new Date(),
