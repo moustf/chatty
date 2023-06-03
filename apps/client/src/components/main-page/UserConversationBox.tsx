@@ -20,13 +20,13 @@ export const UserConversationBox: FC<UserConversation> = ({ id, name, message, t
         dispatch(setChatsListShownToFalseAction(false));
       }}
     >
-    <div className="w-full flex justify-between items-center">
+      <div className="w-full flex justify-between items-center">
         <ConversationsImage
           name={name}
           type={type}
           usersNumber={usersNumber}
         />
-      <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6">
           <h3
             className="text-bold text-h3 lg:text-h4 xl:text-h3 text-grey-800"
           >
@@ -35,12 +35,12 @@ export const UserConversationBox: FC<UserConversation> = ({ id, name, message, t
           <p className="text-grey-500 text-subtitle1">
             {message}
           </p>
-      </div>
+        </div>
         <p className="text-grey-800 text-h5">
           {formatTime(createdAt)}
         </p>
+      </div>
+      <div className="w-full h-1 rounded-lg bg-grey-300" />
     </div>
-    <div className="w-full h-1 rounded-lg bg-grey-300" />
-  </div>
   );
-  };
+};

@@ -6,10 +6,12 @@ import { useAppDispatch } from '../../hooks/redux';
 import { setChatsListShownToTrueAction } from '../../features/chat/chatSlice';
 import SeeMoreIcon from '../../assets/see-more.svg';
 import ArrowLeftIcon from '../../assets/arrow-left.svg';
+import { useNavigate } from 'react-router-dom';
 
 export const ChatWindowHeading: FC<ConversationsImageHeading> = ({
   type, name, usersNumber,
 }) => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   return (
