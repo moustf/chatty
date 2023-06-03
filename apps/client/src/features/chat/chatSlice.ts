@@ -2,7 +2,7 @@ import { Payload } from '@chatty/types';
 import { createSlice, createSelector, createAction } from '@reduxjs/toolkit';
 
 const initialState = {
-  isChatsListShown: false,
+  isChatsListShown: true,
 };
 
 export const setChatsListShownToFalseAction = createAction<boolean>('chat/setIsChatListShowToFalse');

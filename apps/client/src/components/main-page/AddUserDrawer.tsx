@@ -1,16 +1,12 @@
 import { ChangeEvent, FC, useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { UsersInterface } from '@chatty/types';
-import axios from 'axios';
 
-import { useDebouncedValue } from '../../hooks/useDebouncedValue';
+import { useDebouncedValue } from '../../hooks';
 import { UserBox } from './UserBox';
-
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+import { apiClient } from '../../utils';
 
 export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
-  axios.defaults.withCredentials = true;
-
   const controller = new AbortController();
 
   const [query, setQuery] = useState<string>('');
@@ -19,8 +15,7 @@ export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
 
   const { mutate, data, error } = useMutation({
     mutationFn: (data: string) => (
-      axios.get(`${baseUrl}/api/v1/user/find?q=${data}`, {
-        withCredentials: true,
+      apiClient.get(`/user/find?q=${data}`, {
         signal: controller.signal,
       })
     ),

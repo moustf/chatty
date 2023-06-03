@@ -7,7 +7,7 @@ import {
   changeUserPassword,
   getUserConversations,
 } from '../controllers';
-import { userDataAuth } from '../middlewares/userAuth';
+import { userDataAuth } from '../middlewares';
 
 export const userRouter = Router();
 

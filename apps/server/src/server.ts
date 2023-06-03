@@ -9,8 +9,6 @@ import express, { Request, Response } from 'express';
 import { SERVER_CORS_OPTIONS } from './config/cors';
 import { config } from './config/environments';
 import { serverErrorHandler, notFoundHandler } from './controllers';
-import { Conversation } from './models/conversations';
-import { User } from './models/users';
 import { router } from './routers';
 
 export const app = express();
@@ -26,13 +24,6 @@ app.use([
 app.set('port', process.env.port || config.port);
 
 app.use('/api/v1', router);
-
-app.get('/echo', async (_req: Request, res: Response) => {
-  const users = await User.find({}).exec();
-  const conversations = await Conversation.find({}).exec();
-
-  return res.json({ text: "I'm Alive", users, conversations });
-});
 
 if (config.nodeEnv === 'production') {
   app.use(express.static(join(__dirname, '..', 'client', 'dist')));

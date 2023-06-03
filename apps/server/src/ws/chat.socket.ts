@@ -4,13 +4,13 @@ import { Server as SocketServer } from 'socket.io';
 import { SocketEventsMap } from '@chatty/types';
 
 import { config } from '../config/environments';
-import { addNewMessageService } from '../services/addNewMessage';
+import { addNewMessageService } from '../services';
 
 export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
   const chatTopic = io.of('/chat');
 
   chatTopic.on('connection', (socket) => {
-    config.nodeEnv === 'development' && console.log(socket.id, 'connected');
+    config.nodeEnv !== 'production' && console.log(socket.id, 'connected');
 
     socket.on('ping', () => socket.emit('pong'));
 
@@ -19,20 +19,22 @@ export const plugChatEvents = (io: SocketServer<SocketEventsMap>) => {
       socket.join(chatId); // ? Connect to a room.
       socket.on('newMessage', (data) => {
         // ? Receive the data from the new message, then call the add new message service function.
-        const { type, text, fileName, fileData } = JSON.parse(data);
-
-        const conversationId = chatId.split(':')[1];
+        const { type, text, chatId, filesUris } = JSON.parse(data);
 
         addNewMessageService({
-          chatId: conversationId,
-          userId,
           type,
           text,
-          fileName,
-          fileData,
+          chatId,
+          userId,
           socket,
+          filesUris,
+          action: '',
         });
       });
     });
+  });
+
+  chatTopic.on('disconnection', (socket) => {
+    config.nodeEnv !== 'production' && console.log(socket.id, 'disconnected');
   });
 };

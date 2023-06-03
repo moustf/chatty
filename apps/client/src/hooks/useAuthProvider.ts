@@ -1,10 +1,8 @@
 import { User } from '@chatty/types';
-import axios from 'axios';
 import { GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import { auth } from '../firebaseSetup';
-
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+import { apiClient } from '../utils';
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
@@ -12,7 +10,7 @@ const twitterProvider = new TwitterAuthProvider();
 
 export const useAuthProvider = () => async (provider: string) => {
   const sendToken = (user: User) => {
-    axios.post(`${baseUrl}/api/v1/auth/providers`, user);
+    apiClient.post('auth/providers', user);
   };
 
   try {

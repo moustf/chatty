@@ -1,31 +1,31 @@
 import { Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getConversationQuery } from '../../queries/conversations';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const getConversation = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { chatId } = req.query;
-    const { id } = req.user;
+    const { id } = req.user as { id: string; email: string };
 
     if (!chatId) {
       throw new GenericError(
-        STATUS_CODES.WRONG_DATA,
+        StatusCodes.WrongData,
         "The user didn't provide a chat id or provided an invalid chat id."
       );
     }
 
-    const conversationData = await getConversationQuery(chatId, id);
+    const conversationData = await getConversationQuery(chatId as string, id);
 
     if (!conversationData.length) {
       throw new GenericError(
-        STATUS_CODES.NO_CONTENT,
+        StatusCodes.NoContent,
         "The conversation you requested have no data or doesn't exist or the chat id is invalid."
       );
     }

@@ -1,27 +1,27 @@
 import { Response, NextFunction } from 'express';
 
-import { STATUS_CODES } from '@chatty/types';
+import { CustomRequest, StatusCodes } from '@chatty/types';
 
 import { getUser } from '../../queries/user';
-import { GenericError } from '../../utils/custom/GenericError';
+import { GenericError } from '../../utils';
 
 export const checkUserPassword = async (
-  req: any,
+  req: CustomRequest,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { id } = req.user;
+    const { id } = req.user as { id: string; email: string };
 
     if (!id) {
-      throw new GenericError(STATUS_CODES.UNAUTHORIZED, 'Unauthorized!');
+      throw new GenericError(StatusCodes.Unauthorized, 'Unauthorized!');
     }
 
     const user = await getUser({ _id: id });
 
     if (!user) {
       throw new GenericError(
-        STATUS_CODES.NOT_FOUND,
+        StatusCodes.NotFound,
         'The user you are searching for does not exist!'
       );
     }

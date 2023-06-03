@@ -1,9 +1,7 @@
-import { STATUS_CODES, validateLoginData } from '@chatty/types';
+import { StatusCodes, validateLoginData } from '@chatty/types';
 
 import { getUserByEmail } from '../queries/user';
-import { comparePasswords } from '../utils/bcrypt';
-import { GenericError } from '../utils/custom/GenericError';
-import { generateToken } from '../utils/jwt';
+import { comparePasswords, generateToken, GenericError } from '../utils';
 
 export const loginUser = async (email: string, password: string) => {
   await validateLoginData.validate({ email, password });
@@ -13,7 +11,7 @@ export const loginUser = async (email: string, password: string) => {
 
   if (!user) {
     throw new GenericError(
-      STATUS_CODES.NOT_FOUND,
+      StatusCodes.NotFound,
       'The user does not have account on the platform!'
     );
   }
@@ -22,7 +20,7 @@ export const loginUser = async (email: string, password: string) => {
 
   if (!areSamePasswords) {
     throw new GenericError(
-      STATUS_CODES.UNAUTHORIZED,
+      StatusCodes.Unauthorized,
       "The user's password is not valid!"
     );
   }

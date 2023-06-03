@@ -1,6 +1,7 @@
 export type MessageData = {
   type: string;
   text?: string;
-  image?: string;
+  media?: string[];
+  action: string;
   sender: string;
 };

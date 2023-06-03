@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { SocketEventsMap } from '@chatty/types';
+import { baseUrl } from '../config/environment';
 
-const url = import.meta.env.VITE_APP_BASE_URL;
-
-const socket: Socket<SocketEventsMap> = io(`${url}/chat`, {
+const socket: Socket<SocketEventsMap> = io(`${baseUrl}/chat`, {
   transports: ['websocket'],
 }); // ? Keep it here to create only one socket instance.
 

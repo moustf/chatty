@@ -10,18 +10,18 @@ import {
   createAsyncThunk,
   createAction,
 } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import { apiClient } from '../../utils';
 
 const initialState = new CustomMessagesHashTable();
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
 // ? Setting a whole new chat to the store.
 const fetchChatMessages = ({
   chatId, limit, offset,
 }: {
   chatId: string, limit: string, offset: string,
-}) => axios.get(
-  `${baseUrl}/api/v1/conversations/messages?chatId=${chatId}&limit=${limit}&offset=${offset}`
+  }) => apiClient.get(
+    `/conversations/messages?chatId=${chatId}&limit=${limit}&offset=${offset}`
   );
 export const setChatMessages = createAsyncThunk(
   'messages/setChatMessages',

@@ -1,20 +1,16 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 import { UserConversationBox } from './UserConversationBox';
 import { useAppSelector } from '../../hooks/redux';
 import { selectIsChatsListShown } from '../../features/chat/chatSlice';
-
-const baseUrl = import.meta.env.VITE_APP_BASE_URL;
+import { apiClient } from '../../utils';
 
 export const UserConversationList: FC = () => {
   const { data } = useQuery({
     queryKey: ['getUserConversations'],
     queryFn: () => (
-      axios.get(`${baseUrl}/api/v1/user/conversations`, {
-        withCredentials: true,
-      })
+      apiClient.get('/user/conversations')
     ),
   });
 
@@ -22,11 +18,11 @@ export const UserConversationList: FC = () => {
 
   return (
     <section
-      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 shadow-z24 flex flex-col gap-8 px-4 py-8 ${!isChatsListShown && 'hidden'} lg:flex`}
+      className={`w-full md:w-full lg:w-1/3 xl:w-1/4 shadow-z24 flex flex-col gap-8 px-4 py-8 ${isChatsListShown && 'flex'} ${!isChatsListShown && 'hidden'} lg:flex`}
     >
       {
         data?.data.data.map((con: any) => {
-          const name = con.name || `${con.users[0].firstName} ${con.users[0].lastName || ''}`;
+          const name = con.name || `${con.users[0][0].firstName[0]} ${con.users[0][0].lastName || ''}`;
           const message = con.messages[0].text;
           const lastUpdate = con.messages[0].createdAt;
 

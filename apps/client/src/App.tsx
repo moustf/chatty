@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { SignupPage } from "./pages/Signup";
 import { LoginPage } from './pages/Login';
 import { MainPage } from './pages/Main';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { useAppDispatch, useAppSelector } from './hooks';
 import { selectUerData, setUserData } from './features/auth/authSlice';
 import { ChatWindow } from './components/main-page/ChatWindow';
 import "./App.css";
@@ -37,7 +37,6 @@ function App() {
   }, []);
 
   const userData = useAppSelector(selectUerData);
-  console.log(userData);
 
   const router = createBrowserRouter([
     {
