@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 
-import { SERVER_CORS_OPTIONS } from './config/cors';
+import { SERVER_CORS_OPTIONS } from './config';
 import { config } from './config/environments';
 import { serverErrorHandler, notFoundHandler } from './controllers';
 import { router } from './routers';

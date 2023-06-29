@@ -4,7 +4,7 @@ import { Server as SocketServer } from 'socket.io';
 
 import { SocketEventsMap } from '@chatty/types';
 
-import { SOCKET_CORS_OPTIONS } from '../config/cors';
+import { SOCKET_CORS_OPTIONS } from '../config';
 
 import { plugChatEvents } from './chat.socket';
 

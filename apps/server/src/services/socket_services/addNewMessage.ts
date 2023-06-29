@@ -3,7 +3,7 @@ import { Socket } from 'socket.io';
 
 import { AddMessageParameters, validateMessageData } from '@chatty/types';
 
-import { addNewMessageQuery } from '../queries/conversations';
+import { addNewMessageQuery } from '../../queries';
 
 type AddMessageParametersWithSocket = AddMessageParameters & { socket: Socket };
 

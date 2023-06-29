@@ -21,7 +21,10 @@ export const ChatWindowHeading: FC<ConversationsImageHeading> = ({
       >
         <div
           className="w-8 h-8 rounded-full border border-solid border-black cursor-pointer flex justify-center items-center hover:border-0 hover:bg-grey"
-          onClick={() => dispatch(setChatsListShownToTrueAction(true))}
+          onClick={() => {
+            dispatch(setChatsListShownToTrueAction(true));
+            navigate('/main');
+          }}
         >
           <img
             src={ArrowLeftIcon}

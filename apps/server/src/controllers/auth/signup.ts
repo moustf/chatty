@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { StatusCodes, userDataRouteSchema } from '@chatty/types';
 
-import { registerUser } from '../../services/signup';
+import { registerUser } from '../../services';
 import { GenericError } from '../../utils';
 
 export const signupController = async (

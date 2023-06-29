@@ -6,7 +6,7 @@ import {
   userOldNewPasswordsSchema,
 } from '@chatty/types';
 
-import { getUser } from '../../queries/user';
+import { getUser } from '../../queries';
 import { comparePasswords, hashPassword, GenericError } from '../../utils';
 
 export const changeUserPassword = async (

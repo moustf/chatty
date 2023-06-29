@@ -2,14 +2,15 @@ import { FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useForm, SubmitHandler, FieldValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { User } from '@chatty/types';
-import { userDataComponentSchema } from '@chatty/types';
+import { User, userDataComponentSchema } from '@chatty/types';
 import { useNavigate } from 'react-router-dom';
 
-import { SignupLoginWelcomeSection } from '../components/SignupLoginWelcomeSection';
-import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
-import { OrSeparator } from '../components/OrSeparator';
-import { InputField } from '../components/InputField';
+import {
+  SignupLoginWelcomeSection,
+  SocialMediaAuthSection,
+  OrSeparator,
+  InputField,
+} from '../components';
 import { apiClient, errorSwalMessage, successSwalMessage } from '../utils';
 import { useErrorMessage } from '../hooks';
 
@@ -35,7 +36,7 @@ export const SignupPage: FC = () => {
   });
 
   const {
-    handleSubmit, control, reset, formState: { errors, dirtyFields }
+    handleSubmit, control, formState: { errors, dirtyFields }
   } = useForm({
     defaultValues: {
       firstName: '',
@@ -49,20 +50,20 @@ export const SignupPage: FC = () => {
 
   const isValid = Object.keys(dirtyFields).length === 5;
 
-  const onSignupSubmit: SubmitHandler<FieldValue<any>> = handleSubmit((data: User) => mutate(data));
+  const onSignupSubmit: SubmitHandler<User> = (data: User) => mutate(data);
 
   if (Object.keys(errors).length && !errorMessage) {
     setError(
       errors.firstName
-        ? 'First Name is required!'
+        ? errors.firstName.message as string
         : errors.lastName
-          ? 'Last Name is required!'
+          ? errors.lastName.message as string
           : errors.email
-            ? 'Please provide a valid email!'
+            ? errors.email.message as string
             : errors.password
-              ? 'Password should contain one upper letter, one lower letter, one number, one symbol, and at least 5 characters!'
+              ? errors.password.message as string
               : errors.confirmPassword
-                ? 'The two passwords should match!'
+                ? errors.confirmPassword.message as string
                 : 'Unknown error!'
     );
   }
@@ -90,7 +91,7 @@ export const SignupPage: FC = () => {
           {errorMessage && (
             <div className="text-error text-[0.8rem] my-2">{errorMessage}</div>
           )}
-          <form onSubmit={onSignupSubmit}>
+          <form onSubmit={handleSubmit(onSignupSubmit)}>
             <section className={`${step === 1 ? 'flex' : 'hidden'} flex-col`}>
               {
                 [
@@ -129,21 +130,23 @@ export const SignupPage: FC = () => {
                 `w-full h-12 mt-2 lg:mt-8 bg-secondary rounded-lg text-[#fff] text-btn font-bold cursor-pointer hover:shadow-secondary ${!isValid && 'cursor-not-allowed'}`
               }
               type={step === 1 || step === 2 ? 'button' : 'submit'}
-              onClick={
+              onClick={() => setStep(
                 step === 1 && !isValid
-                  ? () => setStep(2)
+                  ? 2
                   : step === 2 && !isValid
-                    ? () => setStep(1)
-                    : () => setStep(3)
-              }
+                    ? 1
+                    : 3
+              )}
               disabled={step === 3 && !isValid}
-            >{
+            >
+              {
                 step === 1 && !isValid
                   ? 'Next'
                   : step === 2 && !isValid
                     ? 'Back'
                     : 'Submit'
-              }</button>
+              }
+            </button>
           </form>
         </section>
       </main>

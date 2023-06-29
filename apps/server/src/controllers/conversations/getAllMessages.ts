@@ -7,7 +7,7 @@ import {
   validateAllMessagesQueryStrings,
 } from '@chatty/types';
 
-import { getAllMessagesQuery } from '../../queries/conversations';
+import { getAllMessagesQuery } from '../../queries';
 import { GenericError } from '../../utils';
 
 export const getAllMessages = async (

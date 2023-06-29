@@ -10,8 +10,8 @@ export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
   const controller = new AbortController();
 
   const [query, setQuery] = useState<string>('');
-  const debouncedQuery = useDebouncedValue(query);
   const [users, setUsers] = useState<UsersInterface[] | []>([]);
+  const debouncedQuery = useDebouncedValue(query);
 
   const { mutate, data, error } = useMutation({
     mutationFn: (data: string) => (
@@ -24,15 +24,14 @@ export const AddUserDrawer: FC<{ isVisible: boolean }> = ({ isVisible }) => {
   useEffect(() => {
     if (debouncedQuery) {
       mutate(debouncedQuery);
+
+      setUsers(data?.data.data);
+
+      if (error) setUsers([]);
+      if (query === '') setUsers([]);
     }
-
-    setUsers(data?.data.data);
-
-    if (error) setUsers([]);
-    if (query === '') setUsers([]);
-
     return () => controller.abort();
-  }, [debouncedQuery])
+  }, [debouncedQuery, query]);
 
   return (
     <section

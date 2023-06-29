@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 
 import { StatusCodes, CustomRequest } from '@chatty/types';
 
-import { getUser } from '../queries/user';
+import { getUser } from '../queries';
 import { GenericError, verifyToken } from '../utils';
 
 export const userDataAuth = async (

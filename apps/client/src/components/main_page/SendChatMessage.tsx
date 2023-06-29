@@ -17,7 +17,6 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
   const { socket, isConnected } = useConnect();
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
     dispatch(setUserData());
   }, []);
