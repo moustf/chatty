@@ -11,9 +11,9 @@ export const UserConversationList: FC = () => {
   const { chatId } = useParams();
   const dispatch = useAppDispatch();
 
-  if (chatId) {
-    dispatch(setChatsListShownToFalseAction(false));
-  }
+  // if (chatId) {
+  //   dispatch(setChatsListShownToFalseAction(false));
+  // }
 
   const { data } = useQuery({
     queryKey: ['getUserConversations'],

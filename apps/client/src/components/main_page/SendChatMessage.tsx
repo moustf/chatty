@@ -2,11 +2,11 @@ import { FC, useState, useEffect, useRef } from 'react';
 
 import { useConnect, useAppSelector, useAppDispatch } from '../../hooks';
 import { selectUerData, setUserData } from '../../features/auth/authSlice';
-
-import AttachIcon from '../../assets/attach.svg';
-import SendIcon from '../../assets/send.svg';
+import { getAllMessagesOfAChat, setChatMessages } from '../../features/messages/messagesSlice';
 import { AttachFile } from './AttachFile';
 import { errorSwalMessage, uploadData } from '../../utils';
+import AttachIcon from '../../assets/attach.svg';
+import SendIcon from '../../assets/send.svg';
 
 export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
   const inputRef = useRef<HTMLInputElement | any>();
@@ -19,7 +19,10 @@ export const SendChatMessage: FC<{ chatId: string }> = ({ chatId }) => {
 
   useEffect(() => {
     dispatch(setUserData());
-  }, []);
+    dispatch(setChatMessages({ chatId, limit: '5', offset: '0', }));
+  }, [dispatch]);
+
+  const conversationMessages = useAppSelector(getAllMessagesOfAChat(chatId));
 
   const { id } = useAppSelector(selectUerData); // ? Current user id.
 
