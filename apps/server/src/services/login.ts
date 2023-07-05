@@ -1,6 +1,6 @@
 import { StatusCodes, validateLoginData } from '@chatty/types';
 
-import { getUserByEmail } from '../queries/user';
+import { getUserByEmail } from '../queries';
 import { comparePasswords, generateToken, GenericError } from '../utils';
 
 export const loginUser = async (email: string, password: string) => {

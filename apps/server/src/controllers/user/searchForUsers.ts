@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { StatusCodes } from '@chatty/types';
 
-import { searchForUser } from '../../queries/user';
+import { searchForUser } from '../../queries';
 import { GenericError } from '../../utils';
 
 export const searchForUsers = async (

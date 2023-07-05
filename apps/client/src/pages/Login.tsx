@@ -5,10 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { LoginData, validateLoginData } from '@chatty/types';
 
-import { SignupLoginWelcomeSection } from '../components/SignupLoginWelcomeSection';
-import { SocialMediaAuthSection } from '../components/SocialMediaAuthSection';
-import { OrSeparator } from '../components/OrSeparator';
-import { InputField } from '../components/InputField';
+import {
+  SignupLoginWelcomeSection, SocialMediaAuthSection, OrSeparator, InputField,
+} from '../components';
 import { apiClient, errorSwalMessage, successSwalMessage } from '../utils';
 import { useErrorMessage } from '../hooks';
 
@@ -45,14 +44,14 @@ export const LoginPage: FC = () => {
   if (Object.keys(errors).length && !errorMessage) {
     setError(
       errors.email
-        ? 'You must enter a valid email!'
+        ? errors.email.message as string
         : errors.password
-          ? 'Password should contain one upper letter, one lower letter, one number, one symbol, and at least 5 characters!'
+          ? errors.password.message as string
           : 'Unknown error!'
     );
   }
 
-  const onLoginSubmit: SubmitHandler<FieldValue<any>> = handleSubmit((data: LoginData) => mutate(data));
+  const onLoginSubmit: SubmitHandler<LoginData> = (data: LoginData) => mutate(data);
 
   return (
     <div className="w-full h-screen flex">
@@ -67,7 +66,12 @@ export const LoginPage: FC = () => {
             <h2 className="text-bold text-h3 md:text-h2 mb-8">Sign in to Chatty!</h2>
             <p className="text-subtitle1 text-grey-600">
               Don't you have an account?
-              <a className="text-[#2065D1] underline hover:text-info-darker visited:text-secondary" href="/signup">Sign up</a>
+              <a
+                className="text-[#2065D1] underline hover:text-info-darker visited:text-secondary"
+                href="/signup"
+              >
+                Sign up
+              </a>
               {"  "}
               .
             </p>
@@ -77,7 +81,7 @@ export const LoginPage: FC = () => {
           {errorMessage && (
             <div className="text-error text-[0.8rem] my-2">{errorMessage}</div>
           )}
-          <form onSubmit={onLoginSubmit}>
+          <form onSubmit={handleSubmit(onLoginSubmit)}>
             <InputField
               control={control}
               fieldName="email"
@@ -96,7 +100,9 @@ export const LoginPage: FC = () => {
               }
               type="submit"
               disabled={!isValid}
-            >Login</button>
+            >
+              Login
+            </button>
           </form>
         </section>
     </main>

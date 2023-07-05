@@ -7,13 +7,11 @@ import Swal from 'sweetalert2';
 import { userOldNewPasswordsSchema } from '@chatty/types';
 import { apiClient } from '../../utils';
 
-
 type ChangePasswords = {
   oldPassword: string;
   newPassword: string;
   confirmNewPassword: string;
 };
-
 
 export const UpdatePasswordForm: FC = () => {
   const { handleSubmit, control, formState: { errors } } = useForm({

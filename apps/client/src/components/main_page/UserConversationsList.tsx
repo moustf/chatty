@@ -1,12 +1,20 @@
 import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { UserConversationBox } from './UserConversationBox';
-import { useAppSelector } from '../../hooks/redux';
-import { selectIsChatsListShown } from '../../features/chat/chatSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectIsChatsListShown, setChatsListShownToFalseAction } from '../../features/chat/chatSlice';
 import { apiClient } from '../../utils';
 
 export const UserConversationList: FC = () => {
+  const { chatId } = useParams();
+  const dispatch = useAppDispatch();
+
+  // if (chatId) {
+  //   dispatch(setChatsListShownToFalseAction(false));
+  // }
+
   const { data } = useQuery({
     queryKey: ['getUserConversations'],
     queryFn: () => (

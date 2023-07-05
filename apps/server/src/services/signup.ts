@@ -1,6 +1,6 @@
 import { User, StatusCodes } from '@chatty/types';
 
-import { getUserByEmail, createUser, getUser } from '../queries/user';
+import { getUserByEmail, createUser, getUser } from '../queries';
 import { hashPassword, generateToken, GenericError } from '../utils';
 
 export const registerUser = async ({
